@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import AreaServicio, SolicitudServicio
-
+from core.patrones.singleton import ConfiguracionSistema
 
 @admin.register(AreaServicio)
 class AreaServicioAdmin(admin.ModelAdmin):
@@ -38,5 +38,5 @@ class SolicitudServicioAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("fecha_solicitud",)
-    list_per_page = 10
+    llist_per_page = (ConfiguracionSistema().registros_por_pagina)
     list_select_related = ("area",)

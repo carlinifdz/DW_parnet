@@ -1,11 +1,11 @@
-# Ejecución ----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Ejecución ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Ejecuta el proyecto con `python manage.py runserver`
 Entra a `http://127.0.0.1:8000/`
 Panel administrativo de Django: `http://127.0.0.1:8000/admin/`
 
 
-# Intrucciones -------------------------------------------------------------------------------------------------------------------------------------------------------
+# Intrucciones ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 1. Ejecutar db.sql en mysql
 2. Crear entorno virtual con python `-m venv venv` 
@@ -44,3 +44,11 @@ from productos.models import Producto, CategoriaProducto
 from servicios.models import AreaServicio, SolicitudServicio
 from comunicacion.models import Sugerencia
 from core.models import Noticia, Cliente, Slider
+
+# Explicaciones del codigo ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. ORM
+Cada parte del ORM se encuentra dentro de cada nucleo de django en el archivo `models.py`
+
+2. Singleton
+Se encuentra dentro de `core/patrones/`

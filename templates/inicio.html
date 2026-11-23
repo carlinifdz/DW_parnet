@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ParNet Ingeniería</title>
+    <title>
+        {{ configuracion_sistema.nombre_empresa }}
+    </title>
+
 </head>
 
 <body>
 
-    <h1>ParNet Ingeniería</h1>
+    <header>
 
-    <h2>Proyecto web</h2>
+        <h1>
+            {{ configuracion_sistema.nombre_empresa }}
+        </h1>
 
-    <p>El servidor Django funciona correctamente.</p>
+        <p>
+            {{ configuracion_sistema.descripcion }}
+        </p>
 
-    <a href="/admin/">
-        Panel de administración
-    </a>
+    </header>
+
+    <main>
+
+        <h2>Proyecto web</h2>
+
+        <p>El servidor Django funciona correctamente.</p>
+
+        <p>Patrón Singleton implementado.</p>
+
+        <p>
+            Moneda del sistema:
+            {{ configuracion_sistema.moneda }}
+        </p>
+
+        <a href="/admin/">
+            Panel de administración
+        </a>
+
+    </main>
+
+    <footer>
+
+        <hr>
+
+        <p>
+            {{ configuracion_sistema.nombre_empresa }}
+            | Versión {{ configuracion_sistema.version }}
+        </p>
+
+    </footer>
 
 </body>
 </html>

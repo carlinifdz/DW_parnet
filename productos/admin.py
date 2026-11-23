@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import CategoriaProducto, Producto
+from core.patrones.singleton import ConfiguracionSistema
 
 
 @admin.register(CategoriaProducto)
@@ -40,7 +41,7 @@ class ProductoAdmin(admin.ModelAdmin):
         "marca",
     )
 
-    list_per_page = 10
+    list_per_page = (ConfiguracionSistema().registros_por_pagina)
 
     readonly_fields = (
         "fecha_registro",
