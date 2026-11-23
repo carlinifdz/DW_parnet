@@ -38,3 +38,9 @@ y ponla en el campo `DJANGO_SECRET_KEY=`, y pon tu contraseña en el campo `DB_P
 11. Crea las migraciones de django `python manage.py migrate`
 12. Crea tu  adminsitrador con `python manage.py createsuperuser`
 13. Ejecuta el proyecto con `python manage.py runserver`
+14. Ejecuta `python manage.py makemigrations` y `python manage.py migrate` para crear las migraciones
+16. Abre la terminal de Django con `python manage.py shell` e importa los modelos con:
+from productos.models import Producto, CategoriaProducto
+from servicios.models import AreaServicio, SolicitudServicio
+from comunicacion.models import Sugerencia
+from core.models import Noticia, Cliente, Slider
