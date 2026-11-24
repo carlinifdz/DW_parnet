@@ -7,9 +7,11 @@ from .estadisticas import registrar_usuario_conectado
 
 NAMESPACES_PUBLICOS = {
     "core",
+    "productos",
     "servicios",
+    "comunicacion",
+    "multimedia",
 }
-
 
 def es_pagina_publica(request):
 
