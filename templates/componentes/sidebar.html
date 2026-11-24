@@ -181,9 +181,24 @@
 </section>
 
 
-<!-- Contadores -->
+<!-- Contadores del sitio web -->
 
-<section class="sidebar-contadores">
+<<!-- Contadores del sitio web -->
+
+<section
+    class="sidebar-contadores"
+    id="contadores-parnet"
+    data-api-url="{% url 'core:api_estadisticas' %}">
+
+    <!-- Token de seguridad para las peticiones AJAX -->
+
+    <div hidden id="csrf-contadores">
+
+        {% csrf_token %}
+
+    </div>
+
+    <!-- Usuarios conectados -->
 
     <div class="contador-fila">
 
@@ -201,6 +216,8 @@
 
     </div>
 
+    <!-- Contador de visitas -->
+
     <div class="contador-fila">
 
         <img
@@ -209,14 +226,32 @@
 
         <span>Visitas:</span>
 
-        <div class="contador-digital"
-             id="contador-visitas">
+        {% with digitos=total_visitas|default:0|stringformat:"05d" %}
 
-            {{ total_visitas|default:0|stringformat:"05d" }}
+            <div
+                class="contador-digital"
+                id="contador-visitas"
+                role="img"
+                aria-label="{{ total_visitas|default:0 }} visitas">
 
-        </div>
+                {% for digito in digitos %}
+
+                    <span class="contador-digito"
+                          aria-hidden="true">
+
+                        {{ digito }}
+
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        {% endwith %}
 
     </div>
+
+    <!-- Copyright -->
 
     <p class="sidebar-copyright">
 

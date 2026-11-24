@@ -36,6 +36,50 @@ class PruebaPublicaBase(SimpleTestCase):
 
         self.areas_mock.return_value = []
 
+        # Simular contador de visitas
+
+        parche_contador = patch(
+            "core.context_processors.Visita"
+        )
+
+        self.contador_mock = parche_contador.start()
+
+        self.addCleanup(parche_contador.stop)
+
+        self.contador_mock.objects.count.return_value = 0
+
+        # Simular registro de visitas
+
+        parche_registro = patch(
+            "core.middleware.Visita"
+        )
+
+        self.registro_mock = parche_registro.start()
+
+        self.addCleanup(parche_registro.stop)
+
+        # Simular registro de usuarios conectados
+
+        parche_usuarios = patch(
+            "core.middleware.registrar_usuario_conectado"
+        )
+
+        self.usuarios_mock = parche_usuarios.start()
+
+        self.addCleanup(parche_usuarios.stop)
+
+        # Simular consulta de usuarios conectados
+
+        parche_conectados = patch(
+            "core.context_processors.contar_usuarios_conectados"
+        )
+
+        self.conectados_mock = parche_conectados.start()
+
+        self.addCleanup(parche_conectados.stop)
+
+        self.conectados_mock.return_value = 0
+
 # =========================================
 # PATRON SINGLETON
 # =========================================

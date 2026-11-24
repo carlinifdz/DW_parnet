@@ -29,4 +29,10 @@ urlpatterns = [
         name="listado_clientes"
     ),
 
+    path(
+        "api/estadisticas/",
+        views.api_estadisticas,
+        name="api_estadisticas"
+    ),
+
 ]

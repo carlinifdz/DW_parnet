@@ -47,6 +47,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "core.middleware.RegistroVisitasMiddleware",
 ]
 
 
@@ -76,6 +77,8 @@ TEMPLATES = [
                 "core.context_processors.configuracion_global",
                 "core.context_processors.noticias_sidebar",
                 "core.context_processors.areas_sidebar",
+                "core.context_processors.contador_visitas",
+                "core.context_processors.contador_usuarios",
             ],
         },
     },

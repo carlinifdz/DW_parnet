@@ -3,7 +3,17 @@ from django.core.paginator import Paginator
 
 from core.patrones.singleton import ConfiguracionSistema
 
-from .models import Slider, Noticia, Cliente
+from .models import Slider, Noticia, Cliente, Visita
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.cache import never_cache
+
+from .estadisticas import (
+    registrar_usuario_conectado,
+    contar_usuarios_conectados,
+    limpiar_usuarios_inactivos,
+)
 
 
 # =========================================
@@ -112,3 +122,24 @@ def listado_clientes(request):
         "clientes/listado.html",
         contexto
     )
+
+# =========================================
+# API DE ESTADISTICAS
+# =========================================
+
+@never_cache
+@require_POST
+def api_estadisticas(request):
+
+    registrar_usuario_conectado(request)
+
+    limpiar_usuarios_inactivos()
+
+    datos = {
+        "total_visitas": Visita.objects.count(),
+        "usuarios_conectados": (
+            contar_usuarios_conectados()
+        ),
+    }
+
+    return JsonResponse(datos)

@@ -54,4 +54,7 @@ Cada parte del ORM se encuentra dentro de cada nucleo de django en el archivo `m
 Se encuentra dentro de `core/patrones/`
 
 3. Pruebas
-Se encuentran en `core/tests.py` y se ejecutan con `python manage.py test core`
+Se encuentran en `core/tests.py` y se ejecutan con `python manage.py test core servicios`
+
+4. Contador de visitas
+A través de `core/middleware.py`
