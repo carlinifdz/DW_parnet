@@ -1,0 +1,150 @@
+/* =========================================
+   PARNET INGENIERIA
+   Pie de pagina
+   ========================================= */
+
+.pie-pagina {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        215px minmax(0, 1fr) 75px;
+
+    align-items: center;
+
+    gap: 0;
+
+    min-height: 70px;
+
+    padding: 0 8px 5px 0;
+
+    overflow: hidden;
+
+    background-color: #063575;
+
+    background-image: linear-gradient(
+        to bottom,
+        #063575 0%,
+        #005b96 65%,
+        #75afd2 100%
+    );
+
+    color: #ffffff;
+}
+
+/* Logotipo inferior */
+
+.footer-logo-contenedor {
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2;
+}
+
+.logo-footer {
+    display: block;
+
+    width: 98px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* Navegacion inferior */
+
+.footer-enlaces {
+    position: relative;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px 0;
+
+    padding: 10px 0;
+
+    z-index: 2;
+}
+
+.footer-enlaces a {
+    display: inline-block;
+
+    padding: 0 5px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+    font-weight: normal;
+
+    line-height: 1.2;
+
+    text-align: center;
+    text-decoration: underline;
+
+    color: #ffffff;
+
+    border-right: 1px solid #ffffff;
+
+    transition: color 0.15s ease;
+}
+
+.footer-enlaces a:last-child {
+    border-right: none;
+}
+
+.footer-enlaces a:hover {
+    color: #ffff00;
+}
+
+.footer-enlaces a:focus-visible {
+    outline: 2px solid #ffff00;
+    outline-offset: 2px;
+}
+
+/* Globo decorativo */
+
+.footer-globo-contenedor {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+.globo-footer {
+    width: 62px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* Linea decorativa inferior */
+
+.footer-linea {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 9px;
+
+    height: 2px;
+
+    background-color: #c2def2;
+
+    transform: rotate(-0.4deg);
+
+    z-index: 1;
+
+    pointer-events: none;
+}

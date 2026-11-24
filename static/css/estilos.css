@@ -1,0 +1,151 @@
+/* =========================================
+   PARNET INGENIERIA
+   Configuracion general
+   ========================================= */
+
+:root {
+    --azul-oscuro: #063b7b;
+    --azul-marino: #002e68;
+    --azul-principal: #05658c;
+    --azul-secundario: #4298c5;
+    --azul-claro: #96c4df;
+    --amarillo: #ffee00;
+    --blanco: #ffffff;
+
+    --ancho-contenedor: 1000px;
+    --ancho-sidebar: 215px;
+
+    --fuente-principal: Arial, Helvetica, sans-serif;
+}
+
+/* Modelo de caja */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Documento */
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    font-family: var(--fuente-principal);
+    font-size: 14px;
+
+    color: var(--blanco);
+
+    background: linear-gradient(
+        to bottom,
+        var(--azul-secundario),
+        var(--azul-claro)
+    );
+
+    background-attachment: fixed;
+}
+
+/* Enlaces */
+
+a {
+    color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 2px;
+}
+
+/* Imagenes y multimedia */
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+/* Formularios */
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+}
+
+/* Contenedor general */
+
+.contenedor-parnet {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: var(--ancho-contenedor);
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    background-color: var(--azul-principal);
+}
+
+/* Distribucion principal */
+
+.estructura-principal {
+    display: grid;
+
+    grid-template-columns:
+        var(--ancho-sidebar) minmax(0, 1fr);
+
+    flex: 1;
+
+    align-items: stretch;
+
+    min-width: 0;
+}
+
+/* Prevencion de desbordamientos */
+
+.barra-lateral,
+.contenido-principal {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* Tablas responsivas */
+
+.tabla-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Seleccion de texto */
+
+::selection {
+    color: var(--azul-marino);
+    background-color: var(--amarillo);
+}
+
+/* Accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

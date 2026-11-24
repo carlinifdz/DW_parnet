@@ -1,61 +1,138 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+{% extends "base.html" %}
 
-    <meta charset="UTF-8">
+{% load static %}
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+{% block titulo %}
+    Página Principal | ParNet Ingeniería
+{% endblock %}
 
-    <title>
-        {{ configuracion_sistema.nombre_empresa }}
-    </title>
+{% block contenido %}
 
-</head>
+    <!-- Indicador de pagina -->
 
-<body>
+    <div class="titulo-pagina">
+        Página Principal
+    </div>
 
-    <header>
+    <!-- Slider provisional -->
 
-        <h1>
-            {{ configuracion_sistema.nombre_empresa }}
-        </h1>
+    <div class="slider-principal">
 
-        <p>
-            {{ configuracion_sistema.descripcion }}
-        </p>
+        <img
+            src="{% get_media_prefix %}slider/ingenieria.jpg"
+            alt="Soluciones en telecomunicaciones y cableado">
 
-    </header>
+    </div>
 
-    <main>
+    <!-- Objetivo de la empresa -->
 
-        <h2>Proyecto web</h2>
+    <section class="bloque-informativo">
 
-        <p>El servidor Django funciona correctamente.</p>
+        <img
+            src="{% static 'img/oficina.jpg' %}"
+            alt="Instalaciones empresariales"
+            class="imagen-informativa">
 
-        <p>Patrón Singleton implementado.</p>
-
-        <p>
-            Moneda del sistema:
-            {{ configuracion_sistema.moneda }}
-        </p>
-
-        <a href="/admin/">
-            Panel de administración
-        </a>
-
-    </main>
-
-    <footer>
-
-        <hr>
+        <h2>
+            ¿Cuál es el objetivo principal de PARNET?
+        </h2>
 
         <p>
-            {{ configuracion_sistema.nombre_empresa }}
-            | Versión {{ configuracion_sistema.version }}
+            Nuestra empresa tiene como objetivo suministrar
+            soluciones integrales en telecomunicaciones
+            (voz y datos) y eléctricas que resuelvan las
+            necesidades empresariales con productos,
+            aplicaciones, servicios y tecnología de punta.
         </p>
 
-    </footer>
+        <p>
+            Buscamos simplificar el trabajo al usuario final,
+            obteniendo una comunicación eficiente y de alta
+            confiabilidad, incrementando los índices de
+            productividad y competitividad de su empresa
+            y del personal de la misma.
+        </p>
 
-</body>
-</html>
+        <p>
+            Las fibras ópticas y los sistemas de
+            comunicaciones constituyen herramientas
+            fundamentales para el desarrollo tecnológico.
+        </p>
+
+    </section>
+
+    <!-- Servicios electricos -->
+
+    <section class="bloque-informativo">
+
+        <img
+            src="{% static 'img/tablero-electrico.jpg' %}"
+            alt="Tablero de distribución eléctrica"
+            class="imagen-informativa">
+
+        <h2>
+            ¿Hay buena energía dentro de su empresa?
+        </h2>
+
+        <p>
+            Normalmente, las personas y los encargados
+            de la informática en las empresas consideran
+            los virus como uno de los principales riesgos
+            para la información del negocio.
+        </p>
+
+        <p>
+            Sin embargo, los problemas asociados con
+            la energía eléctrica también pueden ocasionar
+            daños en los equipos y pérdidas de información.
+        </p>
+
+        <p>
+            Picos, sobrevoltajes, transitorios,
+            interrupciones, apagones y distorsiones son
+            algunos de los problemas más comunes que
+            afectan a los equipos electrónicos.
+        </p>
+
+        <p>
+            ParNet Ingeniería ofrece soluciones orientadas
+            a proteger los equipos y garantizar la continuidad
+            de las operaciones empresariales.
+        </p>
+
+    </section>
+
+    <!-- Desarrollo de software -->
+
+    <section class="seccion-software">
+
+        <h2>
+            Con el afán de brindarle soluciones integrales,
+            ParNet Ingeniería le ofrece desarrollo de
+            software tales como:
+        </h2>
+
+        <ul class="lista-software">
+
+            <li>Aplicaciones a la medida</li>
+
+            <li>Aplicaciones Web</li>
+
+            <li>Aplicaciones Cliente-Servidor</li>
+
+            <li>Desarrollo de aplicaciones multimedia</li>
+
+            <li>
+                Software de nómina para el control
+                total de sus empleados
+            </li>
+
+            <li>Aplicaciones móviles</li>
+
+            <li>Bases de datos</li>
+
+        </ul>
+
+    </section>
+
+{% endblock %}

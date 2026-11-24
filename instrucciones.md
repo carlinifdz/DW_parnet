@@ -52,3 +52,6 @@ Cada parte del ORM se encuentra dentro de cada nucleo de django en el archivo `m
 
 2. Singleton
 Se encuentra dentro de `core/patrones/`
+
+3. Pruebas
+Se encuentran en `core/tests.py` y se ejecutan con `python manage.py test core`

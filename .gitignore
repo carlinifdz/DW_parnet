@@ -34,3 +34,7 @@ Thumbs.db
 # Archivos temporales
 *.tmp
 *.bak
+
+!media/slider/
+media/slider/*
+!media/slider/ingenieria.jpg

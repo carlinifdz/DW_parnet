@@ -1,0 +1,215 @@
+{% load static %}
+
+<!-- Noticias -->
+
+<section class="sidebar-noticias">
+
+    <div class="noticias-encabezado">
+
+        <img
+            src="{% static 'img/globo-noticias.png' %}"
+            alt="">
+
+        <h2>Noticias</h2>
+
+        <img
+            src="{% static 'img/globo-noticias.png' %}"
+            alt="">
+
+    </div>
+
+    <div class="noticias-contenido">
+
+        <article class="noticia-sidebar">
+
+            <p>
+                Alianzas en telecomunicaciones
+                generará competencia:
+                Standard &amp; Poor's.
+
+                <a href="#">[Leer más...]</a>
+            </p>
+
+        </article>
+
+        <article class="noticia-sidebar">
+
+            <p>
+                La TV satelital cumple 50 años.
+
+                <a href="#">[Leer más...]</a>
+            </p>
+
+        </article>
+
+        <a href="{% url 'admin:index' %}"
+           class="boton-control-panel">
+
+            Control Panel PARNET
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- Areas de servicios -->
+
+<section class="sidebar-areas">
+
+    <h2 class="areas-encabezado">
+        Áreas PARNET
+    </h2>
+
+    <ul class="lista-areas">
+
+        <li>
+            <a href="#">Certificaciones</a>
+        </li>
+
+        <li>
+            <a href="#">Telecomunicaciones</a>
+        </li>
+
+        <li>
+            <a href="#">Redes Eléctricas</a>
+        </li>
+
+        <li>
+            <a href="#">Circuito Cerrado TV</a>
+        </li>
+
+        <li>
+            <a href="#">Corriente Regulada</a>
+        </li>
+
+        <li>
+            <a href="#">Data Centers</a>
+        </li>
+
+        <li>
+            <a href="#">Fibra Óptica</a>
+        </li>
+
+        <li>
+            <a href="#">Cables Estructurados</a>
+        </li>
+
+        <li>
+            <a href="#">Pólizas</a>
+        </li>
+
+        <li>
+            <a href="#">Outsourcing</a>
+        </li>
+
+        <li>
+            <a href="#">Administración</a>
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- Marcas y proveedores -->
+
+<section class="sidebar-proveedores">
+
+    <h2 class="proveedores-encabezado">
+        Marcas y Proveedores
+    </h2>
+
+    <div class="proveedores-contenido">
+
+        <article>
+
+            <p>
+
+                <strong>PANDUIT™</strong>
+
+                es líder mundial en el diseño y
+                fabricación de productos para
+                cableado y comunicaciones.
+
+                <a href="https://www.panduit.com/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    [Leer más...]
+
+                </a>
+
+            </p>
+
+        </article>
+
+        <article>
+
+            <p>
+
+                <strong>Cisco Systems</strong>
+
+                es líder mundial en redes para
+                Internet.
+
+                <a href="https://www.cisco.com/"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    [Leer más...]
+
+                </a>
+
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- Contadores -->
+
+<section class="sidebar-contadores">
+
+    <div class="contador-fila">
+
+        <img
+            src="{% static 'img/icono-conectados.png' %}"
+            alt="">
+
+        <span>Conectados:</span>
+
+        <span id="usuarios-conectados">
+            {{ usuarios_conectados|default_if_none:0|default:0 }}
+        </span>
+
+    </div>
+
+    <div class="contador-fila">
+
+        <img
+            src="{% static 'img/icono-visitas.png' %}"
+            alt="">
+
+        <span>Visitas:</span>
+
+        <div class="contador-digital"
+             id="contador-visitas">
+
+            {{ total_visitas|default:0|stringformat:"05d" }}
+
+        </div>
+
+    </div>
+
+    <p class="sidebar-copyright">
+
+        Copyright {% now "Y" %}
+
+    </p>
+
+</section>

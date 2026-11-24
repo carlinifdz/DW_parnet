@@ -1,0 +1,41 @@
+{% load static %}
+
+<footer class="pie-pagina">
+
+    <img
+        src="{% static 'img/logo-pie.png' %}"
+        alt="ParNet Ingeniería"
+        class="logo-footer">
+
+    <div class="footer-contenido">
+
+        <div class="footer-enlaces">
+
+            <a href="{% url 'core:inicio' %}">
+                Página Principal
+            </a>
+
+            <a href="#">¿Quiénes Somos?</a>
+
+            <a href="#">Clientes</a>
+
+            <a href="#">Servicios</a>
+
+            <a href="#">Productos</a>
+
+            <a href="#">Casos de Éxito</a>
+
+            <a href="#">Contacto</a>
+
+            <a href="#">Soporte</a>
+
+        </div>
+
+        <p>
+            Copyright {% now "Y" %} -
+            {{ configuracion_sistema.nombre_empresa }}
+        </p>
+
+    </div>
+
+</footer>

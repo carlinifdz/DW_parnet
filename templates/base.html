@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="ParNet Ingeniería. Soluciones en
+          telecomunicaciones, voz, datos, redes eléctricas
+          y fibra óptica.">
+
+    <meta name="author"
+          content="ParNet Ingeniería">
+
+    <title>
+        {% block titulo %}
+            {{ configuracion_sistema.nombre_empresa }}
+        {% endblock %}
+    </title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <!-- Estilos generales -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/estilos.css' %}">
+
+    <!-- Encabezado y navegacion -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/encabezado.css' %}">
+
+    <!-- Barra lateral -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/sidebar.css' %}">
+
+    <!-- Contenido principal -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/contenido.css' %}">
+
+    <!-- Pie de pagina -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/footer.css' %}">
+
+    <!-- Diseño responsivo -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/responsive.css' %}">
+
+    {% block estilos_extra %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div class="contenedor-parnet">
+
+        <!-- Encabezado -->
+
+        {% include "componentes/encabezado.html" %}
+
+        <!-- Navegacion -->
+
+        {% include "componentes/navbar.html" %}
+
+        <!-- Distribucion principal -->
+
+        <div class="estructura-principal">
+
+            <!-- Barra lateral -->
+
+            <aside class="barra-lateral"
+                   aria-label="Información complementaria">
+
+                {% include "componentes/sidebar.html" %}
+
+            </aside>
+
+            <!-- Contenido de cada pagina -->
+
+            <main class="contenido-principal"
+                  id="contenido-principal">
+
+                {% block contenido %}
+                {% endblock %}
+
+            </main>
+
+        </div>
+
+        <!-- Pie de pagina -->
+
+        {% include "componentes/footer.html" %}
+
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- JavaScript general -->
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block scripts_extra %}
+    {% endblock %}
+
+</body>
+
+</html>

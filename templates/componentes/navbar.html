@@ -1,0 +1,113 @@
+<nav class="navbar navbar-expand-lg menu-principal"
+     data-bs-theme="dark"
+     aria-label="Navegación principal">
+
+    <div class="container-fluid p-0">
+
+        <!-- Boton para dispositivos moviles -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuParnet"
+            aria-controls="menuParnet"
+            aria-expanded="false"
+            aria-label="Abrir menú de navegación">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <span class="menu-texto-movil d-lg-none">
+            Menú PARNET
+        </span>
+
+        <!-- Enlaces de navegacion -->
+
+        <div class="collapse navbar-collapse"
+             id="menuParnet">
+
+            <ul class="navbar-nav w-100">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.url_name == 'inicio' and request.resolver_match.namespace == 'core' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'core:inicio' %}"
+                        {% if request.resolver_match.url_name == 'inicio' and request.resolver_match.namespace == 'core' %}
+                            aria-current="page"
+                        {% endif %}>
+
+                        Página Principal
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        ¿Quiénes Somos?
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Clientes
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Servicios
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Productos
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Casos de Éxito
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Contactos
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#">
+                        Socios
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
