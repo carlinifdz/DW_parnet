@@ -372,16 +372,16 @@ INSERT INTO clientes
 (nombre, logo, sitio_web, descripcion)
 VALUES
 (
-    'Empresa de ejemplo A',
-    'clientes/empresa_a.png',
-    'https://example.com',
-    'Cliente hipotético del sector industrial'
+    'Grupo Industrial Saltillo',
+    'clientes/gis.png',
+    'https://gis.com.mx',
+    'Empresa del sector manufacturero.'
 ),
 (
-    'Empresa de ejemplo B',
-    'clientes/empresa_b.png',
-    'https://example.org',
-    'Cliente hipotético del sector tecnológico'
+    'FEMSA',
+    'clientes/femsa.webp',
+    'https://femsa.com',
+    'Comercio y distribución'
 );
 
 -- SLIDER

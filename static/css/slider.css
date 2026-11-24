@@ -1,0 +1,148 @@
+/* =========================================
+   PARNET INGENIERIA
+   Slider principal
+   ========================================= */
+
+.slider-principal {
+    position: relative;
+
+    margin: 0 8px 30px;
+
+    overflow: hidden;
+
+    border: 1px solid #225675;
+
+    background-color: #063575;
+}
+
+/* Imagenes */
+
+.slider-imagen {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 740 / 228;
+
+    object-fit: contain;
+
+    background-color: #063575;
+}
+
+/* Contenedor del carrusel */
+
+#sliderParnet {
+    width: 100%;
+}
+
+#sliderParnet .carousel-inner {
+    width: 100%;
+}
+
+#sliderParnet .carousel-item {
+    width: 100%;
+}
+
+/* Botones de navegacion */
+
+#sliderParnet .carousel-control-prev,
+#sliderParnet .carousel-control-next {
+    width: 8%;
+
+    opacity: 0.65;
+
+    transition: opacity 0.2s ease;
+}
+
+#sliderParnet .carousel-control-prev:hover,
+#sliderParnet .carousel-control-next:hover {
+    opacity: 1;
+}
+
+#sliderParnet .carousel-control-prev-icon,
+#sliderParnet .carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+
+    padding: 5px;
+
+    background-color: rgba(0, 35, 75, 0.55);
+
+    background-size: 55%;
+
+    border-radius: 50%;
+}
+
+/* Indicadores */
+
+#sliderParnet .carousel-indicators {
+    margin-bottom: 6px;
+}
+
+#sliderParnet .carousel-indicators button {
+    width: 9px;
+    height: 9px;
+
+    margin: 0 4px;
+
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+
+    background-color: #ffffff;
+
+    opacity: 0.65;
+}
+
+#sliderParnet .carousel-indicators .active {
+    background-color: #ffff00;
+
+    opacity: 1;
+}
+
+/* Control de pausa */
+
+.slider-pausa {
+    position: absolute;
+
+    right: 8px;
+    bottom: 8px;
+
+    z-index: 3;
+
+    padding: 3px 8px;
+
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+
+    background-color: #063575;
+
+    color: #ffffff;
+
+    font-size: 11px;
+}
+
+/* Adaptacion movil */
+
+@media (max-width: 767.98px) {
+
+    .slider-principal {
+        margin: 0 0 20px;
+    }
+
+    #sliderParnet .carousel-control-prev,
+    #sliderParnet .carousel-control-next {
+        width: 12%;
+    }
+
+    #sliderParnet .carousel-control-prev-icon,
+    #sliderParnet .carousel-control-next-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    #sliderParnet .carousel-indicators button {
+        width: 7px;
+        height: 7px;
+    }
+
+}

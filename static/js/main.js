@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     inicializarMenuMovil();
+    inicializarSlider();
 
     console.log("ParNet Ingeniería iniciado correctamente.");
 
@@ -43,6 +44,61 @@ function inicializarMenuMovil() {
             }
 
         });
+
+    });
+
+}
+
+function inicializarSlider() {
+
+    const slider = document.getElementById("sliderParnet");
+
+    const boton = document.getElementById("sliderPausa");
+
+    if (!slider || typeof bootstrap === "undefined") {
+        return;
+    }
+
+    const carrusel = bootstrap.Carousel
+        .getOrCreateInstance(slider);
+
+    let pausado = false;
+
+    if (window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches) {
+
+        carrusel.pause();
+
+        pausado = true;
+
+        if (boton) {
+            boton.textContent = "Reproducir";
+        }
+
+    }
+
+    if (!boton) {
+        return;
+    }
+
+    boton.addEventListener("click", function () {
+
+        if (pausado) {
+
+            carrusel.cycle();
+
+            boton.textContent = "Pausar";
+
+        } else {
+
+            carrusel.pause();
+
+            boton.textContent = "Reproducir";
+
+        }
+
+        pausado = !pausado;
 
     });
 

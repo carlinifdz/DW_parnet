@@ -74,6 +74,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
 
                 "core.context_processors.configuracion_global",
+                "core.context_processors.noticias_sidebar",
             ],
         },
     },

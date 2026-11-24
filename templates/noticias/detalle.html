@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    {{ noticia.titulo }} | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Noticias
+
+    </div>
+
+    <article class="noticia-detalle">
+
+        <h1 class="noticia-detalle-titulo">
+
+            {{ noticia.titulo }}
+
+        </h1>
+
+        <p class="noticia-fecha">
+
+            <i class="bi bi-calendar3"></i>
+
+            Publicado el
+            {{ noticia.fecha_publicacion|date:"d/m/Y" }}
+
+        </p>
+
+        {% if noticia.imagen %}
+
+            <img
+                src="{{ noticia.imagen.url }}"
+                alt="{{ noticia.titulo }}"
+                class="noticia-imagen-detalle">
+
+        {% endif %}
+
+        {% if noticia.resumen %}
+
+            <p class="noticia-resumen">
+
+                {{ noticia.resumen }}
+
+            </p>
+
+        {% endif %}
+
+        <div class="noticia-contenido">
+
+            {{ noticia.contenido|linebreaks }}
+
+        </div>
+
+        <div class="noticia-acciones">
+
+            <a
+                href="{% url 'core:listado_noticias' %}"
+                class="boton-noticia">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Volver a noticias
+
+            </a>
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="boton-noticia">
+
+                <i class="bi bi-house"></i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </article>
+
+{% endblock %}

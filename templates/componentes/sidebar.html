@@ -20,30 +20,55 @@
 
     <div class="noticias-contenido">
 
-        <article class="noticia-sidebar">
+        {% for noticia in noticias_sidebar %}
 
-            <p>
-                Alianzas en telecomunicaciones
-                generará competencia:
-                Standard &amp; Poor's.
+            <article class="noticia-sidebar">
 
-                <a href="#">[Leer más...]</a>
+                <p>
+
+                    {{ noticia.titulo }}
+
+                    {% if noticia.resumen %}
+
+                        <span class="resumen-noticia-sidebar">
+
+                            {{ noticia.resumen|truncatechars:100 }}
+
+                        </span>
+
+                    {% endif %}
+
+                    <a href="{% url 'core:detalle_noticia' noticia.id_noticia %}">
+
+                        [Leer más...]
+
+                    </a>
+
+                </p>
+
+            </article>
+
+        {% empty %}
+
+            <p class="noticias-vacias">
+
+                No hay noticias disponibles.
+
             </p>
 
-        </article>
+        {% endfor %}
 
-        <article class="noticia-sidebar">
+        <a
+            href="{% url 'core:listado_noticias' %}"
+            class="enlace-todas-noticias">
 
-            <p>
-                La TV satelital cumple 50 años.
+            Ver todas las noticias
 
-                <a href="#">[Leer más...]</a>
-            </p>
+        </a>
 
-        </article>
-
-        <a href="{% url 'admin:index' %}"
-           class="boton-control-panel">
+        <a
+            href="{% url 'admin:index' %}"
+            class="boton-control-panel">
 
             Control Panel PARNET
 
@@ -64,49 +89,27 @@
 
     <ul class="lista-areas">
 
-        <li>
-            <a href="#">Certificaciones</a>
-        </li>
+        <li><a href="#">Certificaciones</a></li>
 
-        <li>
-            <a href="#">Telecomunicaciones</a>
-        </li>
+        <li><a href="#">Telecomunicaciones</a></li>
 
-        <li>
-            <a href="#">Redes Eléctricas</a>
-        </li>
+        <li><a href="#">Redes Eléctricas</a></li>
 
-        <li>
-            <a href="#">Circuito Cerrado TV</a>
-        </li>
+        <li><a href="#">Circuito Cerrado TV</a></li>
 
-        <li>
-            <a href="#">Corriente Regulada</a>
-        </li>
+        <li><a href="#">Corriente Regulada</a></li>
 
-        <li>
-            <a href="#">Data Centers</a>
-        </li>
+        <li><a href="#">Data Centers</a></li>
 
-        <li>
-            <a href="#">Fibra Óptica</a>
-        </li>
+        <li><a href="#">Fibra Óptica</a></li>
 
-        <li>
-            <a href="#">Cables Estructurados</a>
-        </li>
+        <li><a href="#">Cables Estructurados</a></li>
 
-        <li>
-            <a href="#">Pólizas</a>
-        </li>
+        <li><a href="#">Pólizas</a></li>
 
-        <li>
-            <a href="#">Outsourcing</a>
-        </li>
+        <li><a href="#">Outsourcing</a></li>
 
-        <li>
-            <a href="#">Administración</a>
-        </li>
+        <li><a href="#">Administración</a></li>
 
     </ul>
 
@@ -184,7 +187,9 @@
         <span>Conectados:</span>
 
         <span id="usuarios-conectados">
-            {{ usuarios_conectados|default_if_none:0|default:0 }}
+
+            {{ usuarios_conectados|default:0 }}
+
         </span>
 
     </div>

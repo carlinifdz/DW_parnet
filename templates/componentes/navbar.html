@@ -58,8 +58,20 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'core' and request.resolver_match.url_name == 'listado_clientes' %}
+                            active
+                        {% endif %}"
+
+                        href="{% url 'core:listado_clientes' %}"
+
+                        {% if request.resolver_match.namespace == 'core' and request.resolver_match.url_name == 'listado_clientes' %}
+                            aria-current="page"
+                        {% endif %}>
+
                         Clientes
+
                     </a>
 
                 </li>

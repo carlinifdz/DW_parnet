@@ -41,23 +41,6 @@
     );
 }
 
-/* Contenedor del slider */
-
-.slider-principal {
-    margin: 0 8px 30px;
-
-    overflow: hidden;
-
-    border: 1px solid #225675;
-}
-
-.slider-principal img {
-    display: block;
-
-    width: 100%;
-    height: auto;
-}
-
 /* Secciones informativas */
 
 .bloque-informativo {

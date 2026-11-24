@@ -1,0 +1,305 @@
+/* =========================================
+   PARNET INGENIERIA
+   Modulo de noticias
+   ========================================= */
+
+
+/* Noticias de la barra lateral */
+
+.resumen-noticia-sidebar {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+}
+
+.enlace-todas-noticias {
+    display: block;
+
+    margin-bottom: 12px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #b9d3ee;
+}
+
+.enlace-todas-noticias:hover {
+    color: #ffff00;
+}
+
+.noticias-vacias {
+    font-size: 13px;
+    text-align: center;
+}
+
+
+/* =========================================
+   LISTADO DE NOTICIAS
+   ========================================= */
+
+.listado-noticias {
+    padding: 5px 8px 20px;
+}
+
+.noticias-titulo-principal {
+    margin-bottom: 25px;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.noticia-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+    padding: 15px;
+
+    border: 1px solid #4298c5;
+
+    background-color: #07577f;
+}
+
+.noticia-imagen-listado {
+    width: 180px;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border: 1px solid #96c4df;
+}
+
+.noticia-informacion {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.noticia-informacion h2 {
+    margin-bottom: 8px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+.noticia-informacion h2 a {
+    color: #ffff00;
+
+    text-decoration: none;
+}
+
+.noticia-informacion h2 a:hover {
+    text-decoration: underline;
+}
+
+.noticia-informacion p {
+    font-size: 14px;
+
+    color: #ffffff;
+}
+
+.noticia-fecha {
+    font-size: 12px !important;
+
+    color: #bedcf0 !important;
+}
+
+
+/* Botones */
+
+.boton-noticia {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border: 1px solid #75a9d5;
+
+    background: linear-gradient(
+        to bottom,
+        #397cb0,
+        #063575
+    );
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    text-decoration: none;
+}
+
+.boton-noticia:hover {
+    color: #ffff00;
+}
+
+
+/* =========================================
+   DETALLE DE NOTICIA
+   ========================================= */
+
+.noticia-detalle {
+    padding: 5px 10px 20px;
+}
+
+.noticia-detalle-titulo {
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #ffff00;
+
+    margin-bottom: 12px;
+}
+
+.noticia-imagen-detalle {
+    display: block;
+
+    width: 100%;
+
+    max-width: 600px;
+
+    max-height: 400px;
+
+    object-fit: contain;
+
+    margin: 20px auto;
+}
+
+.noticia-resumen {
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.noticia-contenido {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #ffffff;
+}
+
+.noticia-contenido p {
+    margin-bottom: 15px;
+
+    text-align: justify;
+}
+
+.noticia-acciones {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   PAGINACION
+   ========================================= */
+
+.noticias-paginacion {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 25px;
+}
+
+.noticias-paginacion a,
+.pagina-actual {
+    padding: 6px 10px;
+
+    font-size: 12px;
+
+    border: 1px solid #4298c5;
+}
+
+.noticias-paginacion a {
+    background-color: #063575;
+
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+.noticias-paginacion a:hover {
+    color: #ffff00;
+}
+
+.pagina-actual {
+    background-color: #4298c5;
+
+    color: #ffffff;
+}
+
+
+/* Mensaje sin noticias */
+
+.noticias-mensaje {
+    padding: 20px;
+
+    border: 1px solid #4298c5;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   DISPOSITIVOS MOVILES
+   ========================================= */
+
+@media (max-width: 767.98px) {
+
+    .noticia-item {
+        flex-direction: column;
+    }
+
+    .noticia-imagen-listado {
+        width: 100%;
+
+        max-width: 350px;
+
+        margin: 0 auto;
+    }
+
+    .noticia-informacion {
+        width: 100%;
+    }
+
+    .noticia-detalle-titulo {
+        font-size: 20px;
+    }
+
+    .noticia-contenido p {
+        text-align: left;
+    }
+
+    .noticia-acciones {
+        flex-direction: column;
+    }
+
+    .boton-noticia {
+        text-align: center;
+    }
+
+}

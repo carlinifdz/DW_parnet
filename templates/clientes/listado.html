@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+    Clientes | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Clientes
+
+    </div>
+
+    <section class="seccion-clientes">
+
+        <!-- Encabezado -->
+
+        <h1 class="clientes-titulo">
+
+            Nuestros Clientes
+
+        </h1>
+
+        <p class="clientes-introduccion">
+
+            ParNet Ingeniería ofrece soluciones integrales
+            en telecomunicaciones, redes eléctricas,
+            infraestructura tecnológica y servicios
+            especializados para diferentes sectores
+            empresariales.
+
+        </p>
+
+        <p class="clientes-introduccion">
+
+            A continuación, presentamos algunos ejemplos
+            de empresas a las que podrían estar dirigidos
+            nuestros servicios y soluciones.
+
+        </p>
+
+        <!-- Catalogo de clientes -->
+
+        <div class="clientes-grid">
+
+            {% for cliente in clientes %}
+
+                <article class="cliente-tarjeta">
+
+                    <div class="cliente-logo-contenedor">
+
+                        {% if cliente.logo %}
+
+                            {% if cliente.sitio_web %}
+
+                                <a href="{{ cliente.sitio_web }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Visitar sitio web de {{ cliente.nombre }}">
+
+                                    <img
+                                        src="{{ cliente.logo.url }}"
+                                        alt="Logotipo de {{ cliente.nombre }}"
+                                        class="cliente-logo"
+                                        loading="lazy">
+
+                                </a>
+
+                            {% else %}
+
+                                <img
+                                    src="{{ cliente.logo.url }}"
+                                    alt="Logotipo de {{ cliente.nombre }}"
+                                    class="cliente-logo"
+                                    loading="lazy">
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <i class="bi bi-building cliente-icono"
+                               aria-hidden="true">
+                            </i>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="cliente-informacion">
+
+                        <h2 class="cliente-nombre">
+
+                            {{ cliente.nombre }}
+
+                        </h2>
+
+                        {% if cliente.descripcion %}
+
+                            <p class="cliente-descripcion">
+
+                                {{ cliente.descripcion }}
+
+                            </p>
+
+                        {% endif %}
+
+                        {% if cliente.sitio_web %}
+
+                            <a href="{{ cliente.sitio_web }}"
+                               class="boton-cliente"
+                               target="_blank"
+                               rel="noopener noreferrer">
+
+                                Visitar sitio web
+
+                                <i class="bi bi-box-arrow-up-right"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="clientes-mensaje">
+
+                    <i class="bi bi-building"
+                       aria-hidden="true">
+                    </i>
+
+                    <p>
+
+                        No hay clientes disponibles
+                        por el momento.
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Aviso academico -->
+
+        <p class="clientes-aviso">
+
+            Las empresas presentadas en esta sección
+            son ejemplos hipotéticos utilizados con
+            fines académicos.
+
+        </p>
+
+        <!-- Regresar -->
+
+        <div class="clientes-acciones">
+
+            <a href="{% url 'core:inicio' %}"
+               class="boton-cliente">
+
+                <i class="bi bi-house"></i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    Noticias | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Noticias
+    </div>
+
+    <section class="listado-noticias">
+
+        <h1 class="noticias-titulo-principal">
+
+            Noticias de ParNet Ingeniería
+
+        </h1>
+
+        {% for noticia in pagina %}
+
+            <article class="noticia-item">
+
+                {% if noticia.imagen %}
+
+                    <img
+                        src="{{ noticia.imagen.url }}"
+                        alt="{{ noticia.titulo }}"
+                        class="noticia-imagen-listado"
+                        loading="lazy">
+
+                {% endif %}
+
+                <div class="noticia-informacion">
+
+                    <h2>
+
+                        <a href="{% url 'core:detalle_noticia' noticia.id_noticia %}">
+
+                            {{ noticia.titulo }}
+
+                        </a>
+
+                    </h2>
+
+                    <p class="noticia-fecha">
+
+                        <i class="bi bi-calendar3"></i>
+
+                        {{ noticia.fecha_publicacion|date:"d/m/Y" }}
+
+                    </p>
+
+                    <p>
+
+                        {% if noticia.resumen %}
+
+                            {{ noticia.resumen }}
+
+                        {% else %}
+
+                            {{ noticia.contenido|truncatewords:35 }}
+
+                        {% endif %}
+
+                    </p>
+
+                    <a
+                        href="{% url 'core:detalle_noticia' noticia.id_noticia %}"
+                        class="boton-noticia">
+
+                        Leer noticia completa
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="noticias-mensaje">
+
+                No hay noticias disponibles por el momento.
+
+            </div>
+
+        {% endfor %}
+
+        <!-- Paginacion -->
+
+        {% if pagina.paginator.num_pages > 1 %}
+
+            <nav class="noticias-paginacion"
+                 aria-label="Paginación de noticias">
+
+                {% if pagina.has_previous %}
+
+                    <a href="?page=1">
+                        Primera
+                    </a>
+
+                    <a href="?page={{ pagina.previous_page_number }}">
+                        Anterior
+                    </a>
+
+                {% endif %}
+
+                <span class="pagina-actual">
+
+                    Página {{ pagina.number }}
+                    de {{ pagina.paginator.num_pages }}
+
+                </span>
+
+                {% if pagina.has_next %}
+
+                    <a href="?page={{ pagina.next_page_number }}">
+                        Siguiente
+                    </a>
+
+                    <a href="?page={{ pagina.paginator.num_pages }}">
+                        Última
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+    </section>
+
+{% endblock %}

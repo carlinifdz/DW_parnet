@@ -1,8 +1,9 @@
 from django.db import models
 
-
 class Noticia(models.Model):
+
     id_noticia = models.AutoField(primary_key=True)
+
     titulo = models.CharField(max_length=200)
 
     resumen = models.CharField(
@@ -13,30 +14,45 @@ class Noticia(models.Model):
 
     contenido = models.TextField()
 
-    imagen = models.CharField(
+    imagen = models.ImageField(
+        upload_to="noticias/",
         max_length=255,
         blank=True,
         null=True
     )
 
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
+    fecha_publicacion = models.DateTimeField(
+        auto_now_add=True
+    )
+
     activo = models.BooleanField(default=True)
 
     class Meta:
         managed = False
         db_table = "noticias"
+
         verbose_name = "Noticia"
         verbose_name_plural = "Noticias"
-        ordering = ["-fecha_publicacion"]
+
+        ordering = [
+            "-fecha_publicacion",
+            "-id_noticia"
+        ]
 
     def __str__(self):
         return self.titulo
 
-
 class Cliente(models.Model):
     id_cliente = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=150)
-    logo = models.CharField(max_length=255)
+
+    nombre = models.CharField(
+        max_length=150
+    )
+
+    logo = models.ImageField(
+        upload_to="clientes/",
+        max_length=255
+    )
 
     sitio_web = models.URLField(
         max_length=500,
@@ -44,15 +60,23 @@ class Cliente(models.Model):
         null=True
     )
 
-    descripcion = models.TextField(blank=True, null=True)
-    activo = models.BooleanField(default=True)
+    descripcion = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    activo = models.BooleanField(
+        default=True
+    )
 
     class Meta:
         managed = False
         db_table = "clientes"
+
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
-        ordering = ["nombre"]
+
+        ordering = ["nombre", "id_cliente"]
 
     def __str__(self):
         return self.nombre
@@ -73,7 +97,10 @@ class Slider(models.Model):
         null=True
     )
 
-    imagen = models.CharField(max_length=255)
+    imagen = models.ImageField(
+        upload_to="slider/",
+        max_length=255
+)
 
     enlace = models.CharField(
         max_length=500,
@@ -87,8 +114,10 @@ class Slider(models.Model):
     class Meta:
         managed = False
         db_table = "slider"
+
         verbose_name = "Imagen del slider"
         verbose_name_plural = "Imágenes del slider"
+
         ordering = ["orden", "id_slider"]
 
     def __str__(self):

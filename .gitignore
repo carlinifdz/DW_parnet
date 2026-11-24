@@ -38,3 +38,7 @@ Thumbs.db
 !media/slider/
 media/slider/*
 !media/slider/ingenieria.jpg
+
+media/clientes/*
+!media/clientes/femsa.webp
+!media/clientes/gis.png
