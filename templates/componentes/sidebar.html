@@ -78,8 +78,7 @@
 
 </section>
 
-
-<!-- Areas de servicios -->
+<!-- Areas de servicios dinamicas -->
 
 <section class="sidebar-areas">
 
@@ -89,27 +88,35 @@
 
     <ul class="lista-areas">
 
-        <li><a href="#">Certificaciones</a></li>
+        {% for area in areas_sidebar %}
 
-        <li><a href="#">Telecomunicaciones</a></li>
+            <li>
 
-        <li><a href="#">Redes Eléctricas</a></li>
+                <a
+                    href="{% url 'servicios:detalle' area.id_area %}"
 
-        <li><a href="#">Circuito Cerrado TV</a></li>
+                    {% if request.resolver_match.namespace == 'servicios' and request.resolver_match.kwargs.id_area == area.id_area %}
 
-        <li><a href="#">Corriente Regulada</a></li>
+                        class="area-activa"
+                        aria-current="page"
 
-        <li><a href="#">Data Centers</a></li>
+                    {% endif %}>
 
-        <li><a href="#">Fibra Óptica</a></li>
+                    {{ area.nombre }}
 
-        <li><a href="#">Cables Estructurados</a></li>
+                </a>
 
-        <li><a href="#">Pólizas</a></li>
+            </li>
 
-        <li><a href="#">Outsourcing</a></li>
+        {% empty %}
 
-        <li><a href="#">Administración</a></li>
+            <li class="areas-vacias">
+
+                No hay áreas disponibles.
+
+            </li>
+
+        {% endfor %}
 
     </ul>
 

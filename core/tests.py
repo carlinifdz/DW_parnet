@@ -20,12 +20,27 @@ def simular_noticias(mock, noticias=None):
         [] if noticias is None else noticias
     )
 
+class PruebaPublicaBase(SimpleTestCase):
+
+    def setUp(self):
+
+        super().setUp()
+
+        parche_areas = patch(
+            "core.context_processors.areas_activas"
+        )
+
+        self.areas_mock = parche_areas.start()
+
+        self.addCleanup(parche_areas.stop)
+
+        self.areas_mock.return_value = []
 
 # =========================================
 # PATRON SINGLETON
 # =========================================
 
-class ConfiguracionSistemaTest(SimpleTestCase):
+class ConfiguracionSistemaTest(PruebaPublicaBase):
 
     def test_instancia_unica(self):
         self.assertIs(ConfiguracionSistema(), ConfiguracionSistema())
@@ -71,7 +86,7 @@ class ConfiguracionSistemaTest(SimpleTestCase):
 # FRONTEND
 # =========================================
 
-class FrontendTest(SimpleTestCase):
+class FrontendTest(PruebaPublicaBase):
 
     def setUp(self):
         super().setUp()
@@ -153,7 +168,7 @@ class FrontendTest(SimpleTestCase):
 # SLIDER DINAMICO
 # =========================================
 
-class SliderTest(SimpleTestCase):
+class SliderTest(PruebaPublicaBase):
 
     def setUp(self):
         super().setUp()
@@ -200,7 +215,7 @@ class SliderTest(SimpleTestCase):
 # NOTICIAS DINAMICAS
 # =========================================
 
-class NoticiasTest(SimpleTestCase):
+class NoticiasTest(PruebaPublicaBase):
 
     def setUp(self):
         super().setUp()
@@ -260,7 +275,7 @@ class NoticiasTest(SimpleTestCase):
 # MODULO DE CLIENTES
 # =========================================
 
-class ClientesTest(SimpleTestCase):
+class ClientesTest(PruebaPublicaBase):
 
     def setUp(self):
 

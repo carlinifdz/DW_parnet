@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    Servicios | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Servicios
+
+    </div>
+
+    <section class="seccion-servicios">
+
+        <h1 class="servicios-titulo">
+
+            Nuestros Servicios
+
+        </h1>
+
+        <p class="servicios-introduccion">
+
+            ParNet Ingeniería ofrece soluciones integrales
+            en telecomunicaciones, infraestructura eléctrica,
+            redes de datos y servicios tecnológicos,
+            orientadas a satisfacer las necesidades
+            de nuestros clientes.
+
+        </p>
+
+        <p class="servicios-introduccion">
+
+            Seleccione un área de servicio para conocer
+            más información sobre nuestras soluciones.
+
+        </p>
+
+        <div class="servicios-grid">
+
+            {% for area in areas %}
+
+                <article class="servicio-tarjeta">
+
+                    <div class="servicio-encabezado">
+
+                        <i class="bi bi-gear-fill"
+                           aria-hidden="true">
+                        </i>
+
+                        <h2>
+
+                            {{ area.nombre }}
+
+                        </h2>
+
+                    </div>
+
+                    <div class="servicio-cuerpo">
+
+                        {% if area.descripcion %}
+
+                            <p>
+
+                                {{ area.descripcion|truncatewords:30 }}
+
+                            </p>
+
+                        {% else %}
+
+                            <p>
+
+                                Conoce las soluciones
+                                que ofrecemos en esta área.
+
+                            </p>
+
+                        {% endif %}
+
+                        <a
+                            href="{% url 'servicios:detalle' area.id_area %}"
+                            class="boton-servicio">
+
+                            Más información
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <p class="servicios-mensaje">
+
+                    No hay servicios disponibles
+                    por el momento.
+
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="servicios-acciones">
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="boton-servicio">
+
+                <i class="bi bi-house"></i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}

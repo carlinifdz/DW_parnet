@@ -10,9 +10,40 @@ class AreaServicioAdmin(admin.ModelAdmin):
         "activo",
     )
 
-    search_fields = ("nombre",)
+    list_display_links = (
+        "id_area",
+        "nombre",
+    )
+
+    list_editable = ("activo",)
+
     list_filter = ("activo",)
 
+    search_fields = (
+        "nombre",
+        "descripcion",
+    )
+
+    ordering = ("nombre",)
+
+    list_per_page = 10
+
+    fieldsets = (
+
+        ("Información del área", {
+            "fields": (
+                "nombre",
+                "descripcion",
+            )
+        }),
+
+        ("Estado", {
+            "fields": (
+                "activo",
+            )
+        }),
+
+    )
 
 @admin.register(SolicitudServicio)
 class SolicitudServicioAdmin(admin.ModelAdmin):

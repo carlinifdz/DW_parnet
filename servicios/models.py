@@ -17,7 +17,6 @@ class AreaServicio(models.Model):
     def __str__(self):
         return self.nombre
 
-
 class SolicitudServicio(models.Model):
 
     class Estatus(models.TextChoices):

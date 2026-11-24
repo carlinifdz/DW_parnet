@@ -75,6 +75,7 @@ TEMPLATES = [
 
                 "core.context_processors.configuracion_global",
                 "core.context_processors.noticias_sidebar",
+                "core.context_processors.areas_sidebar",
             ],
         },
     },

@@ -1,0 +1,381 @@
+/* =========================================
+   PARNET INGENIERIA
+   Modulo de servicios
+   ========================================= */
+
+
+/* Contenedores principales */
+
+.seccion-servicios,
+.servicio-detalle {
+    padding: 5px 10px 25px;
+}
+
+.servicios-titulo {
+    margin-bottom: 20px;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.servicios-introduccion {
+    margin-bottom: 15px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    text-align: justify;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   LISTADO DE SERVICIOS
+   ========================================= */
+
+.servicios-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.servicio-tarjeta {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #07577f;
+}
+
+
+/* Encabezado de tarjeta */
+
+.servicio-encabezado {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 48px;
+
+    padding: 10px;
+
+    background: linear-gradient(
+        to bottom,
+        #4298c5,
+        #063575
+    );
+
+    border-bottom: 1px solid #82b8dd;
+}
+
+.servicio-encabezado i {
+    font-size: 22px;
+
+    color: #bde5f8;
+}
+
+.servicio-encabezado h2 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+
+/* Contenido de tarjeta */
+
+.servicio-cuerpo {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    flex: 1;
+
+    padding: 15px;
+}
+
+.servicio-cuerpo p {
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   BOTONES
+   ========================================= */
+
+.boton-servicio {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: auto;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+
+    border: 1px solid #75a9d5;
+
+    background: linear-gradient(
+        to bottom,
+        #397cb0,
+        #063575
+    );
+}
+
+.boton-servicio:hover {
+    color: #ffff00;
+
+    filter: brightness(1.15);
+}
+
+.boton-servicio:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   DETALLE DEL SERVICIO
+   ========================================= */
+
+.servicio-ruta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-bottom: 20px;
+
+    font-size: 12px;
+
+    color: #d4e8f5;
+}
+
+.servicio-ruta a {
+    color: #d4e8f5;
+}
+
+.servicio-ruta a:hover {
+    color: #ffff00;
+}
+
+.servicio-detalle-contenido {
+    display: flow-root;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    border: 1px solid #4298c5;
+
+    background-color: #07577f;
+}
+
+.servicio-detalle-icono {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    float: left;
+
+    width: 100px;
+    height: 100px;
+
+    margin: 0 18px 10px 0;
+
+    background: linear-gradient(
+        to bottom,
+        #96c4df,
+        #4298c5
+    );
+
+    border: 1px solid #82b8dd;
+}
+
+.servicio-detalle-icono i {
+    font-size: 55px;
+
+    color: #063575;
+}
+
+.servicio-detalle-contenido h2,
+.servicio-solicitud h2 {
+    margin-bottom: 12px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.servicio-detalle-contenido p {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    text-align: justify;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   SOLICITUD DE SERVICIOS
+   ========================================= */
+
+.servicio-solicitud {
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    border: 1px solid #82b8dd;
+
+    background: linear-gradient(
+        to bottom,
+        #09638d,
+        #06416d
+    );
+}
+
+.servicio-solicitud p {
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MENSAJES Y ACCIONES
+   ========================================= */
+
+.servicios-mensaje {
+    grid-column: 1 / -1;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid #4298c5;
+}
+
+.servicios-acciones {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   BARRA LATERAL
+   ========================================= */
+
+.lista-areas a.area-activa {
+    font-weight: bold;
+
+    color: #002a65;
+
+    border-color: #ffff00;
+
+    filter: brightness(1.1);
+}
+
+.areas-vacias {
+    padding: 10px !important;
+
+    font-size: 13px;
+
+    color: #063575;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   DISEÑO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 767.98px) {
+
+    .seccion-servicios,
+    .servicio-detalle {
+        padding: 5px 0 20px;
+    }
+
+    .servicios-titulo {
+        font-size: 22px;
+    }
+
+    .servicios-introduccion,
+    .servicio-detalle-contenido p {
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .servicio-detalle-icono {
+        float: none;
+
+        margin: 0 auto 20px;
+    }
+
+    .servicio-detalle-contenido {
+        padding: 15px;
+    }
+
+    .servicio-solicitud {
+        padding: 15px;
+    }
+
+    .servicios-acciones {
+        flex-direction: column;
+    }
+
+    .boton-servicio {
+        min-height: 40px;
+    }
+
+}

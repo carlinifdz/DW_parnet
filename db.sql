@@ -292,6 +292,50 @@ VALUES
 (
     'Consultoría',
     'Asesoría técnica especializada'
+),
+(
+    'Certificaciones',
+    'Servicios de certificación y evaluación de infraestructura tecnológica, redes y sistemas de comunicación.'
+),
+(
+    'Telecomunicaciones',
+    'Diseño, instalación y mantenimiento de sistemas de comunicación de voz y datos.'
+),
+(
+    'Redes Eléctricas',
+    'Diseño, instalación y mantenimiento de infraestructura eléctrica para empresas.'
+),
+(
+    'Circuito Cerrado TV',
+    'Implementación de sistemas de videovigilancia y monitoreo mediante cámaras de seguridad.'
+),
+(
+    'Corriente Regulada',
+    'Soluciones para la protección y regulación del suministro eléctrico de equipos electrónicos.'
+),
+(
+    'Data Centers',
+    'Diseño e implementación de infraestructura para centros de datos y servidores.'
+),
+(
+    'Fibra Óptica',
+    'Instalación, mantenimiento y certificación de redes de comunicación mediante fibra óptica.'
+),
+(
+    'Cables Estructurados',
+    'Diseño e instalación de sistemas de cableado estructurado para redes de voz y datos.'
+),
+(
+    'Pólizas',
+    'Pólizas de mantenimiento preventivo y correctivo para infraestructura tecnológica.'
+),
+(
+    'Outsourcing',
+    'Servicios especializados de soporte técnico y administración de infraestructura tecnológica.'
+),
+(
+    'Administración',
+    'Administración y supervisión de recursos, sistemas y proyectos tecnológicos.'
 );
 
 -- SOLICITUDES DE SERVICIOS

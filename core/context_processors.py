@@ -1,6 +1,10 @@
 from core.patrones.singleton import ConfiguracionSistema
+from servicios.consultas import areas_activas
 from .models import Noticia
 
+# =========================================
+# CONFIGURACION GLOBAL
+# =========================================
 
 def configuracion_global(request):
 
@@ -12,6 +16,9 @@ def configuracion_global(request):
         )
     }
 
+# =========================================
+# NOTICIAS DE LA BARRA LATERAL
+# =========================================
 
 def noticias_sidebar(request):
 
@@ -24,4 +31,14 @@ def noticias_sidebar(request):
 
     return {
         "noticias_sidebar": noticias
+    }
+
+# =========================================
+# AREAS DE SERVICIOS
+# =========================================
+
+def areas_sidebar(request):
+
+    return {
+        "areas_sidebar": areas_activas()
     }

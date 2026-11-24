@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    {{ area.nombre }} | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Servicios
+
+    </div>
+
+    <section class="servicio-detalle">
+
+        <!-- Ruta de navegacion -->
+
+        <nav class="servicio-ruta"
+             aria-label="Ruta de navegación">
+
+            <a href="{% url 'core:inicio' %}">
+
+                Inicio
+
+            </a>
+
+            <span> / </span>
+
+            <a href="{% url 'servicios:listado' %}">
+
+                Servicios
+
+            </a>
+
+            <span> / </span>
+
+            <span aria-current="page">
+
+                {{ area.nombre }}
+
+            </span>
+
+        </nav>
+
+        <!-- Nombre del servicio -->
+
+        <h1 class="servicios-titulo">
+
+            {{ area.nombre }}
+
+        </h1>
+
+        <!-- Informacion del servicio -->
+
+        <div class="servicio-detalle-contenido">
+
+            <div class="servicio-detalle-icono">
+
+                <i class="bi bi-gear-wide-connected"
+                   aria-hidden="true">
+                </i>
+
+            </div>
+
+            <h2>
+
+                Descripción del servicio
+
+            </h2>
+
+            {% if area.descripcion %}
+
+                {{ area.descripcion|linebreaks }}
+
+            {% else %}
+
+                <p>
+
+                    Próximamente se incorporará
+                    información adicional sobre este servicio.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Solicitud de servicio -->
+
+        <div class="servicio-solicitud">
+
+            <h2>
+
+                ¿Está interesado en este servicio?
+
+            </h2>
+
+            <p>
+
+                Próximamente podrá enviar una solicitud
+                de servicio directamente desde
+                nuestra plataforma.
+
+            </p>
+
+            <button
+                type="button"
+                class="boton-servicio"
+                disabled>
+
+                <i class="bi bi-clipboard-check"></i>
+
+                Solicitar servicio
+
+            </button>
+
+        </div>
+
+        <!-- Navegacion inferior -->
+
+        <div class="servicios-acciones">
+
+            <a
+                href="{% url 'servicios:listado' %}"
+                class="boton-servicio">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Todos los servicios
+
+            </a>
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="boton-servicio">
+
+                <i class="bi bi-house"></i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}
