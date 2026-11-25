@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+    Solicitud de servicio | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block estilos_extra %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/solicitudes.css' %}">
+
+{% endblock %}
+
+
+{% block contenido %}
+
+<section class="solicitud-seccion">
+
+    <!-- Navegacion -->
+
+    <div class="solicitud-ruta">
+
+        <a href="{% url 'core:inicio' %}">
+
+            Página Principal
+
+        </a>
+
+        <span>»</span>
+
+        <a href="{% url 'servicios:listado' %}">
+
+            Servicios
+
+        </a>
+
+        <span>»</span>
+
+        <span>Solicitar servicio</span>
+
+    </div>
+
+
+    <!-- Encabezado -->
+
+    <div class="solicitud-encabezado">
+
+        <h1>
+
+            <i class="bi bi-clipboard-check"></i>
+
+            Solicitud de servicio
+
+        </h1>
+
+        <p>
+
+            Complete el siguiente formulario para
+            solicitar información o atención especializada
+            de nuestros servicios.
+
+        </p>
+
+    </div>
+
+
+    <!-- Confirmacion del registro -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            {% if message.extra_tags == "solicitud-exitosa" %}
+
+                <div
+                    class="solicitud-validacion-exitosa"
+                    role="status">
+
+                    <i
+                        class="bi bi-check-circle-fill"
+                        aria-hidden="true">
+                    </i>
+
+                    <span>
+
+                        {{ message }}
+
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    <!-- Confirmacion del registro -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            {% if message.extra_tags == "solicitud-exitosa" %}
+
+                <div
+                    class="solicitud-validacion-exitosa"
+                    role="status">
+
+                    <i
+                        class="bi bi-check-circle-fill"
+                        aria-hidden="true">
+                    </i>
+
+                    <span>
+
+                        {{ message }}
+
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    <!-- Formulario -->
+
+    <form
+        method="post"
+        action="{% url 'servicios:solicitar' %}"
+        class="solicitud-formulario"
+        id="formulario-solicitud">
+
+        {% csrf_token %}
+
+
+        <!-- Errores generales -->
+
+        {% if formulario.non_field_errors %}
+
+            <div
+                class="solicitud-error-general"
+                role="alert">
+
+                {{ formulario.non_field_errors }}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- Campos del formulario -->
+
+        <div class="solicitud-grid">
+
+            {% for campo in formulario %}
+
+                <div class="solicitud-campo
+                    {% if campo.name == 'area' or campo.name == 'detalle' or campo.name == 'captcha' %}
+                        solicitud-campo-completo
+                    {% endif %}
+                    {% if campo.errors %}
+                        solicitud-campo-error
+                    {% endif %}">
+
+                    <label for="{{ campo.id_for_label }}">
+
+                        {{ campo.label }}
+
+                        {% if campo.field.required %}
+
+                            <span class="solicitud-obligatorio">
+
+                                *
+
+                            </span>
+
+                        {% endif %}
+
+                    </label>
+
+
+                    <!-- Elemento HTML -->
+
+                    {{ campo }}
+
+
+                    <!-- Texto de ayuda -->
+
+                    {% if campo.help_text %}
+
+                        <small class="solicitud-ayuda">
+
+                            {{ campo.help_text }}
+
+                        </small>
+
+                    {% endif %}
+
+
+                    <!-- Errores del campo -->
+
+                    {% for error in campo.errors %}
+
+                        <div class="solicitud-error">
+
+                            {{ error }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Campos obligatorios -->
+
+        <p class="solicitud-nota">
+
+            * Campos obligatorios.
+
+        </p>
+
+
+        <!-- Botones -->
+
+        <div class="solicitud-botones">
+
+            <a
+                href="{% url 'servicios:listado' %}"
+                class="solicitud-boton solicitud-boton-cancelar">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Cancelar
+
+            </a>
+
+            <button
+                type="submit"
+                class="solicitud-boton solicitud-boton-enviar">
+
+                <i class="bi bi-send"></i>
+
+                Enviar solicitud
+
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

@@ -379,3 +379,100 @@
     }
 
 }
+
+/* =========================================
+   ACCIONES DE SERVICIOS
+   ========================================= */
+
+.servicios-acciones {
+    display: flex;
+
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin: 15px 0;
+}
+
+
+/* =========================================
+   BOTON SOLICITAR SERVICIO
+   ========================================= */
+
+.servicio-boton-solicitar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 16px;
+
+    min-height: 36px;
+
+    background: linear-gradient(
+        to bottom,
+        #3477b5,
+        #083d7c
+    );
+
+    border: 1px solid #8cb1d0;
+
+    border-radius: 3px;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.servicio-boton-solicitar:hover {
+    background: linear-gradient(
+        to bottom,
+        #438bc7,
+        #125195
+    );
+
+    color: #ffdf42;
+
+    border-color: #ffdf42;
+
+    text-decoration: none;
+}
+
+
+.servicio-boton-solicitar:focus-visible {
+    outline: 2px solid #ffdf42;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   DISENO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 575.98px) {
+
+    .servicios-acciones {
+        justify-content: stretch;
+    }
+
+    .servicio-boton-solicitar {
+        width: 100%;
+    }
+
+}

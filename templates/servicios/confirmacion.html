@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block titulo %}
+
+    Confirmación de solicitud | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block estilos_extra %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/solicitudes.css' %}">
+
+{% endblock %}
+
+
+{% block contenido %}
+
+<section class="solicitud-seccion">
+
+    <!-- Ruta de navegacion -->
+
+    <div class="solicitud-ruta">
+
+        <a href="{% url 'core:inicio' %}">
+
+            Página Principal
+
+        </a>
+
+        <span>»</span>
+
+        <a href="{% url 'servicios:listado' %}">
+
+            Servicios
+
+        </a>
+
+        <span>»</span>
+
+        <span>Confirmación</span>
+
+    </div>
+
+
+    <!-- Titulo de la pagina -->
+
+    <div class="solicitud-encabezado">
+
+        <h1>
+
+            <i class="bi bi-clipboard-check"></i>
+
+            Confirmación de solicitud
+
+        </h1>
+
+    </div>
+
+
+    <!-- Contenedor de confirmacion -->
+
+    <div class="confirmacion-contenedor">
+
+        <!-- Icono de confirmacion -->
+
+        <div class="confirmacion-icono">
+
+            <i
+                class="bi bi-check-circle-fill"
+                aria-hidden="true">
+            </i>
+
+        </div>
+
+
+        <!-- Mensaje principal -->
+
+        <h2 class="confirmacion-titulo">
+
+            ¡Solicitud registrada correctamente!
+
+        </h2>
+
+        <p class="confirmacion-mensaje">
+
+            Gracias por contactar a ParNet Ingeniería.
+
+            Hemos recibido tu solicitud de servicio.
+
+        </p>
+
+
+        <!-- Informacion de la solicitud -->
+
+        <div class="confirmacion-resumen">
+
+            <div class="confirmacion-folio">
+
+                <span>
+
+                    Folio de solicitud
+
+                </span>
+
+                <strong>
+
+                    {{ confirmacion.folio }}
+
+                </strong>
+
+            </div>
+
+
+            <dl class="confirmacion-datos">
+
+                <div class="confirmacion-dato">
+
+                    <dt>Área de servicio:</dt>
+
+                    <dd>
+
+                        {{ confirmacion.area }}
+
+                    </dd>
+
+                </div>
+
+
+                <div class="confirmacion-dato">
+
+                    <dt>Fecha de registro:</dt>
+
+                    <dd>
+
+                        {{ confirmacion.fecha }}
+
+                    </dd>
+
+                </div>
+
+
+                <div class="confirmacion-dato">
+
+                    <dt>Estado inicial:</dt>
+
+                    <dd>
+
+                        <span class="confirmacion-estado">
+
+                            <i
+                                class="bi bi-clock"
+                                aria-hidden="true">
+                            </i>
+
+                            {{ confirmacion.estatus }}
+
+                        </span>
+
+                    </dd>
+
+                </div>
+
+            </dl>
+
+        </div>
+
+
+        <!-- Informacion adicional -->
+
+        <p class="confirmacion-nota">
+
+            Conserva tu folio como referencia
+            de la solicitud.
+
+        </p>
+
+
+        <!-- Botones de navegacion -->
+
+        <div class="confirmacion-botones">
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="solicitud-boton solicitud-boton-cancelar">
+
+                <i class="bi bi-house"></i>
+
+                Página Principal
+
+            </a>
+
+
+            <a
+                href="{% url 'servicios:solicitar' %}"
+                class="solicitud-boton solicitud-boton-enviar">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Nueva solicitud
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
