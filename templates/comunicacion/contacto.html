@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Contacto | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/comunicacion.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Contactos
+    </div>
+
+    <section class="seccion-comunicacion">
+
+        <h1 class="comunicacion-titulo">
+            Contacto y Atención a Clientes
+        </h1>
+
+        <p class="comunicacion-introduccion">
+            En ParNet Ingeniería estamos listos para asesorarte en proyectos
+            de telecomunicaciones, redes de voz y datos, fibra óptica e
+            infraestructura eléctrica. Envíanos un correo electrónico mediante
+            el siguiente formulario o regístranos una sugerencia en nuestro buzón.
+        </p>
+
+        <div class="comunicacion-pestanas">
+            <a href="{% url 'comunicacion:contacto' %}"
+               class="boton-pestana activa"
+               aria-current="page">
+                <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+                Contacto por Correo
+            </a>
+            <a href="{% url 'comunicacion:sugerencias' %}"
+               class="boton-pestana">
+                <i class="bi bi-chat-left-dots-fill" aria-hidden="true"></i>
+                Buzón de Sugerencias
+            </a>
+        </div>
+
+        {% include "comunicacion/_mensajes.html" %}
+
+        <div class="comunicacion-grid">
+
+            <!-- Formulario de contacto por correo -->
+            <article class="comunicacion-tarjeta">
+
+                <div class="comunicacion-encabezado">
+                    <i class="bi bi-envelope-paper-fill" aria-hidden="true"></i>
+                    <h2>Formulario de Contacto por Correo Electrónico</h2>
+                </div>
+
+                <div class="comunicacion-cuerpo">
+
+                    <form method="post"
+                          action="{% url 'comunicacion:contacto' %}"
+                          class="formulario-comunicacion"
+                          novalidate>
+
+                        {% csrf_token %}
+
+                        <div class="grupo-campo">
+                            <label for="{{ form_contacto.nombre.id_for_label }}" class="etiqueta-comunicacion">
+                                {{ form_contacto.nombre.label }} *
+                            </label>
+                            {{ form_contacto.nombre }}
+                            {% if form_contacto.nombre.errors %}
+                                <div class="error-comunicacion" role="alert">
+                                    {% for error in form_contacto.nombre.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="fila-campos-doble">
+                            <div class="grupo-campo">
+                                <label for="{{ form_contacto.correo.id_for_label }}" class="etiqueta-comunicacion">
+                                    {{ form_contacto.correo.label }} *
+                                </label>
+                                {{ form_contacto.correo }}
+                                {% if form_contacto.correo.errors %}
+                                    <div class="error-comunicacion" role="alert">
+                                        {% for error in form_contacto.correo.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="{{ form_contacto.telefono.id_for_label }}" class="etiqueta-comunicacion">
+                                    {{ form_contacto.telefono.label }}
+                                </label>
+                                {{ form_contacto.telefono }}
+                                {% if form_contacto.telefono.errors %}
+                                    <div class="error-comunicacion" role="alert">
+                                        {% for error in form_contacto.telefono.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="{{ form_contacto.asunto.id_for_label }}" class="etiqueta-comunicacion">
+                                {{ form_contacto.asunto.label }} *
+                            </label>
+                            {{ form_contacto.asunto }}
+                            {% if form_contacto.asunto.errors %}
+                                <div class="error-comunicacion" role="alert">
+                                    {% for error in form_contacto.asunto.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="{{ form_contacto.mensaje.id_for_label }}" class="etiqueta-comunicacion">
+                                {{ form_contacto.mensaje.label }} *
+                            </label>
+                            {{ form_contacto.mensaje }}
+                            <div class="contador-caracteres" aria-live="polite"></div>
+                            {% if form_contacto.mensaje.errors %}
+                                <div class="error-comunicacion" role="alert">
+                                    {% for error in form_contacto.mensaje.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="comunicacion-acciones">
+                            <button type="submit" class="boton-comunicacion">
+                                <i class="bi bi-send-fill" aria-hidden="true"></i>
+                                Enviar Correo
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+            <!-- Informacion corporativa y acceso a sugerencias -->
+            <aside class="comunicacion-panel-lateral">
+
+                <div class="comunicacion-info-bloque">
+                    <h3>
+                        <i class="bi bi-building" aria-hidden="true"></i>
+                        Datos de Contacto
+                    </h3>
+                    <ul class="lista-datos-contacto">
+                        <li>
+                            <i class="bi bi-envelope-at-fill" aria-hidden="true"></i>
+                            <span><strong>Correo:</strong> {{ correo_empresa }}</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+                            <span><strong>Teléfono:</strong> +52 (844) 415-0000</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill" aria-hidden="true"></i>
+                            <span><strong>Horario:</strong> Lunes a Viernes, 8:30 a 18:00 hrs</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+                            <span><strong>Cobertura:</strong> Soluciones industriales y empresariales</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="comunicacion-info-bloque">
+                    <h3>
+                        <i class="bi bi-chat-square-quote-fill" aria-hidden="true"></i>
+                        ¿Tienes una Sugerencia?
+                    </h3>
+                    <p>
+                        Tu opinión nos ayuda a mejorar continuamente la calidad de
+                        nuestros servicios y atención técnica. Registra tus comentarios
+                        directamente en nuestro buzón interno.
+                    </p>
+                    <a href="{% url 'comunicacion:sugerencias' %}" class="boton-comunicacion w-100">
+                        <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                        Ir al Buzón de Sugerencias
+                    </a>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/comunicacion.js' %}"></script>
+{% endblock %}

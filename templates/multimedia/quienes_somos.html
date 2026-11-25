@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    ¿Quiénes Somos? | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/multimedia.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        ¿Quiénes Somos?
+    </div>
+
+    <section class="seccion-institucional">
+
+        <h1 class="institucional-titulo">
+            Acerca de ParNet Ingeniería
+        </h1>
+
+        <article class="bloque-informativo">
+
+            <img src="{% static 'img/oficina.jpg' %}"
+                 alt="Equipo e instalaciones de ParNet Ingeniería"
+                 class="imagen-informativa">
+
+            <h2>Nuestra Identidad e Historia</h2>
+
+            <p>
+                <strong>ParNet Ingeniería</strong> es una empresa especializada en el
+                diseño, suministro, implementación y mantenimiento de soluciones
+                integrales en telecomunicaciones (voz y datos), fibra óptica,
+                infraestructura eléctrica y desarrollo tecnológico empresarial.
+            </p>
+
+            <p>
+                Nuestro propósito es simplificar la operación tecnológica de
+                nuestros clientes mediante redes confiables, seguras y de alto
+                desempeño que impulsen su productividad y competitividad.
+            </p>
+
+        </article>
+
+        <!-- Mision, Vision y Valores -->
+        <div class="institucional-grid">
+
+            <article class="institucional-tarjeta">
+                <div class="institucional-encabezado">
+                    <i class="bi bi-bullseye" aria-hidden="true"></i>
+                    <h2>Misión</h2>
+                </div>
+                <div class="institucional-cuerpo">
+                    <p>
+                        Proveer soluciones de ingeniería en telecomunicaciones y
+                        sistemas eléctricos con tecnología de vanguardia, personal
+                        certificado y apego a normas internacionales, garantizando
+                        la continuidad operativa de cada cliente.
+                    </p>
+                </div>
+            </article>
+
+            <article class="institucional-tarjeta">
+                <div class="institucional-encabezado">
+                    <i class="bi bi-eye-fill" aria-hidden="true"></i>
+                    <h2>Visión</h2>
+                </div>
+                <div class="institucional-cuerpo">
+                    <p>
+                        Consolidarnos como el socio tecnológico de referencia en
+                        proyectos de conectividad, infraestructura crítica y
+                        transformación digital para la industria y el sector
+                        corporativo.
+                    </p>
+                </div>
+            </article>
+
+            <article class="institucional-tarjeta">
+                <div class="institucional-encabezado">
+                    <i class="bi bi-shield-check" aria-hidden="true"></i>
+                    <h2>Calidad y Valores</h2>
+                </div>
+                <div class="institucional-cuerpo">
+                    <ul class="lista-software">
+                        <li>Calidad certificada en cada instalación.</li>
+                        <li>Seguridad industrial y cumplimiento normativo.</li>
+                        <li>Innovación continua y soporte oportuno.</li>
+                        <li>Honestidad y compromiso con el cliente.</li>
+                    </ul>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Video Institucional integrado -->
+        {% include "multimedia/_reproductor.html" %}
+
+        <div class="institucional-acciones">
+            <a href="{% url 'servicios:listado' %}" class="boton-institucional">
+                <i class="bi bi-gear-fill" aria-hidden="true"></i>
+                Conocer Nuestros Servicios
+            </a>
+            <a href="{% url 'comunicacion:contacto' %}" class="boton-institucional-secundario">
+                <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+                Contactar a un Especialista
+            </a>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/multimedia.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Buzón de Sugerencias | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/comunicacion.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Sugerencias
+    </div>
+
+    <section class="seccion-comunicacion">
+
+        <h1 class="comunicacion-titulo">
+            Buzón de Sugerencias para la Empresa
+        </h1>
+
+        <p class="comunicacion-introduccion">
+            Comparte tus sugerencias, comentarios o propuestas de mejora.
+            Tu mensaje se almacena directamente en el sistema interno de
+            ParNet Ingeniería para seguimiento de calidad.
+        </p>
+
+        <div class="comunicacion-pestanas">
+            <a href="{% url 'comunicacion:contacto' %}"
+               class="boton-pestana">
+                <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+                Contacto por Correo
+            </a>
+            <a href="{% url 'comunicacion:sugerencias' %}"
+               class="boton-pestana activa"
+               aria-current="page">
+                <i class="bi bi-chat-left-dots-fill" aria-hidden="true"></i>
+                Buzón de Sugerencias
+            </a>
+        </div>
+
+        {% include "comunicacion/_mensajes.html" %}
+
+        <div class="comunicacion-grid">
+
+            <article class="comunicacion-tarjeta">
+
+                <div class="comunicacion-encabezado">
+                    <i class="bi bi-chat-left-text-fill" aria-hidden="true"></i>
+                    <h2>Registrar Sugerencia</h2>
+                </div>
+
+                <div class="comunicacion-cuerpo">
+
+                    <form method="post"
+                          action="{% url 'comunicacion:sugerencias' %}"
+                          class="formulario-comunicacion"
+                          novalidate>
+
+                        {% csrf_token %}
+
+                        <div class="fila-campos-doble">
+                            <div class="grupo-campo">
+                                <label for="{{ form_sugerencia.nombre.id_for_label }}" class="etiqueta-comunicacion">
+                                    {{ form_sugerencia.nombre.label }} *
+                                </label>
+                                {{ form_sugerencia.nombre }}
+                                {% if form_sugerencia.nombre.errors %}
+                                    <div class="error-comunicacion" role="alert">
+                                        {% for error in form_sugerencia.nombre.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="{{ form_sugerencia.correo.id_for_label }}" class="etiqueta-comunicacion">
+                                    {{ form_sugerencia.correo.label }} *
+                                </label>
+                                {{ form_sugerencia.correo }}
+                                {% if form_sugerencia.correo.errors %}
+                                    <div class="error-comunicacion" role="alert">
+                                        {% for error in form_sugerencia.correo.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="{{ form_sugerencia.mensaje.id_for_label }}" class="etiqueta-comunicacion">
+                                {{ form_sugerencia.mensaje.label }} *
+                            </label>
+                            {{ form_sugerencia.mensaje }}
+                            <div class="contador-caracteres" aria-live="polite"></div>
+                            {% if form_sugerencia.mensaje.errors %}
+                                <div class="error-comunicacion" role="alert">
+                                    {% for error in form_sugerencia.mensaje.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label class="etiqueta-comunicacion">
+                                <i class="bi bi-shield-check" aria-hidden="true"></i>
+                                {{ form_sugerencia.captcha.label }} *
+                            </label>
+                            <div class="contenedor-recaptcha">
+                                {{ form_sugerencia.captcha }}
+                            </div>
+                            {% if form_sugerencia.captcha.errors %}
+                                <div class="error-comunicacion" role="alert">
+                                    {% for error in form_sugerencia.captcha.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="comunicacion-acciones">
+                            <button type="submit" class="boton-comunicacion">
+                                <i class="bi bi-check2-circle" aria-hidden="true"></i>
+                                Enviar Sugerencia
+                            </button>
+
+                            <a href="{% url 'comunicacion:contacto' %}" class="boton-comunicacion-secundario">
+                                <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                                Volver a Contacto
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+            <aside class="comunicacion-panel-lateral">
+                <div class="comunicacion-info-bloque">
+                    <h3>
+                        <i class="bi bi-award-fill" aria-hidden="true"></i>
+                        Compromiso de Calidad
+                    </h3>
+                    <p>
+                        Todas las sugerencias se registran en nuestra base de datos
+                        institucional y son evaluadas por el comité administrativo
+                        para optimizar nuestros procesos de ingeniería y soporte.
+                    </p>
+                    <ul class="lista-software">
+                        <li>Registro directo en base de datos MySQL.</li>
+                        <li>Protección anti-spam con Google reCAPTCHA v2.</li>
+                        <li>Seguimiento administrativo confidencial.</li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/comunicacion.js' %}"></script>
+{% endblock %}
