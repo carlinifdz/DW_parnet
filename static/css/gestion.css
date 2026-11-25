@@ -1,0 +1,490 @@
+/* =========================================
+   PARNET INGENIERIA
+   Panel administrativo personalizado
+   ========================================= */
+
+.seccion-gestion {
+    padding: 5px 10px 25px;
+}
+
+.gestion-cabecera {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.gestion-titulo {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.gestion-usuario {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 12.5px;
+
+    color: #d4e8f5;
+}
+
+.form-cerrar-sesion {
+    display: inline;
+    margin: 0;
+}
+
+
+/* =========================================
+   NAVEGACION DEL PANEL
+   ========================================= */
+
+.gestion-menu {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 18px;
+
+    padding: 10px;
+
+    border: 1px solid #82b8dd;
+
+    background: linear-gradient(
+        to bottom,
+        #09638d,
+        #06416d
+    );
+}
+
+.gestion-menu-enlace {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 11px;
+
+    font-size: 12.5px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+
+    border: 1px solid #75a9d5;
+
+    background-color: #063575;
+}
+
+.gestion-menu-enlace:hover {
+    color: #ffff00;
+}
+
+.gestion-menu-enlace.activo {
+    font-weight: bold;
+
+    color: #063575;
+
+    border-color: #ffff00;
+
+    background-color: #ffee00;
+}
+
+
+/* =========================================
+   TARJETAS E INDICADORES DEL PANEL
+   ========================================= */
+
+.gestion-tarjetas-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.gestion-tarjeta-kpi {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 13px;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #07577f;
+}
+
+.gestion-kpi-etiqueta {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    color: #bde5f8;
+}
+
+.gestion-kpi-valor {
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.gestion-kpi-sub {
+    margin-top: 4px;
+
+    font-size: 11.5px;
+
+    color: #d4e8f5;
+}
+
+
+/* =========================================
+   CONTENEDORES Y TABLAS ADMINISTRATIVAS
+   ========================================= */
+
+.gestion-bloque {
+    margin-bottom: 20px;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #07577f;
+}
+
+.gestion-bloque-encabezado {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    background: linear-gradient(
+        to bottom,
+        #4298c5,
+        #063575
+    );
+
+    border-bottom: 1px solid #82b8dd;
+}
+
+.gestion-bloque-encabezado h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.gestion-bloque-cuerpo {
+    padding: 15px;
+}
+
+.tabla-gestion {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+.tabla-gestion thead th {
+    padding: 8px 10px;
+
+    text-align: left;
+    font-weight: bold;
+
+    color: #ffff00;
+
+    background-color: #063575;
+
+    border: 1px solid #4298c5;
+}
+
+.tabla-gestion tbody td {
+    padding: 8px 10px;
+
+    vertical-align: middle;
+
+    color: #ffffff;
+
+    border: 1px solid #4298c5;
+}
+
+.tabla-gestion tbody tr:nth-child(even) {
+    background-color: #064c70;
+}
+
+
+/* =========================================
+   FORMULARIOS Y BOTONES ADMINISTRATIVOS
+   ========================================= */
+
+.gestion-formulario-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.gestion-campo-completo {
+    grid-column: 1 / -1;
+}
+
+.grupo-campo {
+    margin-bottom: 14px;
+}
+
+.etiqueta-parnet {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.campo-parnet {
+    width: 100%;
+
+    padding: 7px 10px;
+
+    font-size: 13px;
+
+    color: #063575;
+
+    background-color: #ffffff;
+
+    border: 1px solid #82b8dd;
+}
+
+.campo-parnet:focus {
+    outline: 2px solid #ffff00;
+    outline-offset: 1px;
+}
+
+.checkbox-parnet {
+    width: 17px;
+    height: 17px;
+
+    vertical-align: middle;
+}
+
+.error-campo {
+    margin-top: 4px;
+
+    padding: 4px 8px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #ffff00;
+
+    background-color: rgba(160, 20, 20, 0.75);
+
+    border-left: 3px solid #ffff00;
+}
+
+.boton-gestion {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 6px 12px;
+
+    font-size: 12.5px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    border: 1px solid #75a9d5;
+
+    background: linear-gradient(
+        to bottom,
+        #397cb0,
+        #063575
+    );
+}
+
+.boton-gestion:hover {
+    color: #ffff00;
+
+    filter: brightness(1.15);
+}
+
+.boton-gestion-peligro {
+    border-color: #fca5a5;
+
+    background: linear-gradient(
+        to bottom,
+        #b91c1c,
+        #7f1d1d
+    );
+}
+
+.boton-gestion-exito {
+    border-color: #86efac;
+
+    background: linear-gradient(
+        to bottom,
+        #15803d,
+        #14532d
+    );
+}
+
+.acciones-celda {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.acciones-celda form {
+    display: inline;
+    margin: 0;
+}
+
+
+/* =========================================
+   ALERTAS Y PAGINACION
+   ========================================= */
+
+.gestion-mensajes {
+    margin-bottom: 16px;
+}
+
+.alerta-gestion {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    padding: 10px 14px;
+
+    font-size: 13px;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #063575;
+}
+
+.alerta-gestion.alerta-success {
+    border-color: #86efac;
+    background-color: #14532d;
+}
+
+.alerta-gestion.alerta-error,
+.alerta-gestion.alerta-danger {
+    border-color: #fca5a5;
+    background-color: #7f1d1d;
+}
+
+.gestion-paginacion {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.gestion-paginacion a,
+.gestion-paginacion .pagina-actual {
+    padding: 5px 10px;
+
+    font-size: 12px;
+
+    border: 1px solid #4298c5;
+}
+
+.gestion-paginacion a {
+    background-color: #063575;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.gestion-paginacion a:hover {
+    color: #ffff00;
+}
+
+
+/* =========================================
+   DISEÑO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 767.98px) {
+
+    .seccion-gestion {
+        padding: 5px 0 20px;
+    }
+
+    .gestion-tarjetas-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .gestion-formulario-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .gestion-tarjetas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gestion-cabecera {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}

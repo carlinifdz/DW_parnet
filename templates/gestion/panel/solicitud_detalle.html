@@ -1,0 +1,87 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Detalle de Solicitud #{{ solicitud.id_solicitud }}{% endblock %}
+
+{% block encabezado_panel %}Solicitud de Servicio #{{ solicitud.id_solicitud }}{% endblock %}
+
+{% block contenido_panel %}
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-clipboard2-data-fill" aria-hidden="true"></i>
+                Información del Solicitante
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <table class="tabla-gestion mb-3">
+                <tbody>
+                    <tr>
+                        <th scope="row" style="width: 30%;">Área de Servicio:</th>
+                        <td><strong>{{ solicitud.area.nombre }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombre:</th>
+                        <td>{{ solicitud.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Empresa:</th>
+                        <td>{{ solicitud.empresa|default:"No especificada" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Correo Electrónico:</th>
+                        <td>{{ solicitud.correo }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Teléfono:</th>
+                        <td>{{ solicitud.telefono|default:"No especificado" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha de Solicitud:</th>
+                        <td>{{ solicitud.fecha_solicitud|date:"d/m/Y H:i" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Detalle de la Solicitud:</th>
+                        <td>{{ solicitud.detalle|linebreaks }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div class="grupo-campo">
+                    <label for="{{ form.estatus.id_for_label }}" class="etiqueta-parnet">
+                        {{ form.estatus.label }}
+                    </label>
+                    {{ form.estatus }}
+                    {% if form.estatus.errors %}
+                        <div class="error-campo" role="alert">
+                            {% for error in form.estatus.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="acciones-celda">
+                    <button type="submit" class="boton-gestion boton-gestion-exito">
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                        Actualizar Estatus
+                    </button>
+
+                    <a href="{% url 'gestion:solicitudes_lista' %}" class="boton-gestion">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                        Volver al listado
+                    </a>
+                </div>
+            </form>
+
+        </div>
+
+    </article>
+
+{% endblock %}

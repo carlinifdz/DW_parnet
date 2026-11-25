@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Dashboard de Productos | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Dashboard de Productos
+    </div>
+
+    <section class="seccion-reportes">
+
+        <h1 class="reportes-titulo">
+            Dashboard de Productos por Categoría
+        </h1>
+
+        <p class="reportes-introduccion">
+            Distribución estadística de los productos activos registrados
+            en cada categoría industrial de ParNet Ingeniería.
+        </p>
+
+        <nav class="reportes-menu" aria-label="Secciones de reportes">
+
+            <a
+                href="{% url 'reportes:panel' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
+                Resumen y Dashboards
+            </a>
+
+            <a
+                href="{% url 'reportes:inventario' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-boxes" aria-hidden="true"></i>
+                Reporte de Inventario
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_servicios' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+                Dashboard de Servicios
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_productos' %}"
+                class="reportes-menu-enlace activo">
+
+                <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+                Dashboard de Productos
+            </a>
+
+        </nav>
+
+        <article class="reporte-bloque">
+
+            <div class="reporte-bloque-encabezado">
+
+                <h2>
+                    <i class="bi bi-pie-chart-fill" aria-hidden="true"></i>
+                    Gráfica de Productos Activos por Categoría (Total: {{ total_productos }})
+                </h2>
+
+            </div>
+
+            <div class="reporte-bloque-cuerpo">
+
+                {% if dashboard_productos %}
+
+                    <div class="grafica-canvas-contenedor">
+                        <canvas
+                            id="canvas-dashboard-productos"
+                            class="grafica-canvas"
+                            width="640"
+                            height="240"
+                            data-grafica-reporte="productos"
+                            data-etiquetas='[{% for item in dashboard_productos %}"{{ item.categoria|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}]'
+                            data-valores='[{% for item in dashboard_productos %}{{ item.total }}{% if not forloop.last %},{% endif %}{% endfor %}]'>
+                        </canvas>
+                    </div>
+
+                    <div class="grafica-barras" role="img" aria-label="Productos activos por categoría">
+
+                        {% for item in dashboard_productos %}
+
+                            <div class="grafica-fila">
+
+                                <span class="grafica-etiqueta" title="{{ item.categoria }}">
+                                    {{ item.categoria }}
+                                </span>
+
+                                <div class="grafica-pista">
+                                    <div
+                                        class="grafica-relleno grafica-relleno-productos"
+                                        style="width: {{ item.porcentaje }}%;">
+                                    </div>
+                                </div>
+
+                                <span class="grafica-valor">
+                                    {{ item.total }}
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="tabla-responsive mt-4">
+
+                        <table class="tabla-reporte">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Categoría</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Total de Productos Activos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in dashboard_productos %}
+                                    <tr>
+                                        <td>{{ item.id_categoria }}</td>
+                                        <td>{{ item.categoria }}</td>
+                                        <td><strong>{{ item.total }}</strong></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="reportes-vacio">
+                        No hay categorías de productos registradas.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </article>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/reportes.js' %}"></script>
+{% endblock %}

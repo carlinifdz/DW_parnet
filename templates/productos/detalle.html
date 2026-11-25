@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    {{ producto.nombre }} | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Productos
+
+    </div>
+
+    <section class="producto-detalle">
+
+        <!-- Ruta de navegacion -->
+
+        <nav
+            class="producto-ruta"
+            aria-label="Ruta de navegación">
+
+            <a href="{% url 'core:inicio' %}">
+                Inicio
+            </a>
+
+            <span> / </span>
+
+            <a href="{% url 'productos:listado' %}">
+                Productos
+            </a>
+
+            <span> / </span>
+
+            <a href="{% url 'productos:listado' %}?categoria={{ producto.categoria.id_categoria }}">
+                {{ producto.categoria.nombre }}
+            </a>
+
+            <span> / </span>
+
+            <span aria-current="page">
+                {{ producto.nombre }}
+            </span>
+
+        </nav>
+
+        <!-- Nombre del producto -->
+
+        <h1 class="productos-titulo">
+
+            {{ producto.nombre }}
+
+        </h1>
+
+        <!-- Tarjeta principal del detalle -->
+
+        <div class="producto-detalle-contenedor">
+
+            <div class="producto-detalle-imagen-caja">
+
+                {% if producto.imagen_url %}
+
+                    <img
+                        src="{{ producto.imagen_url }}"
+                        alt="{{ producto.nombre }}"
+                        class="producto-detalle-imagen">
+
+                {% else %}
+
+                    <i class="bi bi-box-seam producto-detalle-icono"
+                       aria-hidden="true">
+                    </i>
+
+                {% endif %}
+
+            </div>
+
+            <div class="producto-detalle-datos">
+
+                <div class="producto-detalle-encabezado">
+
+                    <span class="producto-codigo">
+                        Código: {{ producto.codigo }}
+                    </span>
+
+                    <span
+                        class="producto-estatus {% if producto.stock > 0 %}estatus-existencia{% else %}estatus-agotado{% endif %}">
+
+                        {{ producto.estatus }}
+
+                    </span>
+
+                </div>
+
+                <div class="producto-precio-detalle">
+
+                    ${{ producto.precio|floatformat:2 }}
+                    {{ configuracion_sistema.moneda }}
+
+                </div>
+
+                <table class="producto-tabla-datos">
+
+                    <tbody>
+
+                        <tr>
+                            <th scope="row">Categoría:</th>
+                            <td>{{ producto.categoria.nombre }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Marca:</th>
+                            <td>{{ producto.marca|default:"No especificada" }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Modelo:</th>
+                            <td>{{ producto.modelo|default:"No especificado" }}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Disponibilidad:</th>
+                            <td>
+                                {{ producto.stock }} unidades
+                                ({{ producto.estatus }})
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div class="producto-detalle-descarga">
+
+                    <a
+                        href="{% url 'productos:ficha_pdf' producto.id_producto %}"
+                        class="boton-producto boton-producto-pdf">
+
+                        <i class="bi bi-file-earmark-pdf-fill"
+                           aria-hidden="true">
+                        </i>
+
+                        Descargar Ficha Técnica en PDF
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Descripcion del producto -->
+
+        <div class="producto-detalle-bloque">
+
+            <h2>
+
+                <i class="bi bi-info-circle-fill"
+                   aria-hidden="true">
+                </i>
+
+                Descripción del producto
+
+            </h2>
+
+            {% if producto.descripcion %}
+
+                {{ producto.descripcion|linebreaks }}
+
+            {% else %}
+
+                <p>
+                    No se ha registrado una descripción adicional
+                    para este producto.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Ficha tecnica -->
+
+        <div class="producto-detalle-bloque">
+
+            <h2>
+
+                <i class="bi bi-clipboard2-data-fill"
+                   aria-hidden="true">
+                </i>
+
+                Ficha técnica
+
+            </h2>
+
+            {% if producto.ficha_tecnica %}
+
+                {{ producto.ficha_tecnica|linebreaks }}
+
+            {% else %}
+
+                <p>
+                    Consulte el documento PDF descargable para obtener
+                    las especificaciones técnicas del producto.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Navegacion inferior -->
+
+        <div class="productos-acciones">
+
+            <a
+                href="{% url 'productos:listado' %}"
+                class="boton-producto">
+
+                <i class="bi bi-arrow-left"
+                   aria-hidden="true">
+                </i>
+
+                Volver al catálogo
+
+            </a>
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="boton-producto">
+
+                <i class="bi bi-house"
+                   aria-hidden="true">
+                </i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}

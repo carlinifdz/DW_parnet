@@ -1,0 +1,155 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Administración de Productos{% endblock %}
+
+{% block encabezado_panel %}Catálogo y Existencias de Productos{% endblock %}
+
+{% block contenido_panel %}
+
+    <form
+        method="get"
+        action="{% url 'gestion:productos_lista' %}"
+        class="reportes-filtros">
+
+        <div class="reportes-filtros-fila">
+
+            <div class="reportes-campo">
+                <label for="q-prod">Buscar producto</label>
+                <input
+                    type="search"
+                    id="q-prod"
+                    name="q"
+                    value="{{ busqueda }}"
+                    class="reportes-input"
+                    placeholder="Código, nombre o marca...">
+            </div>
+
+            <div class="reportes-campo">
+                <label for="cat-prod">Categoría</label>
+                <select
+                    id="cat-prod"
+                    name="categoria"
+                    class="reportes-select">
+                    <option value="">Todas las categorías</option>
+                    {% for cat in categorias %}
+                        <option
+                            value="{{ cat.id_categoria }}"
+                            {% if categoria_actual == cat.id_categoria %}selected{% endif %}>
+                            {{ cat.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="reportes-botones">
+                <button type="submit" class="boton-gestion">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    Filtrar
+                </button>
+
+                <a href="{% url 'gestion:producto_crear' %}" class="boton-gestion boton-gestion-exito">
+                    <i class="bi bi-plus-circle-fill" aria-hidden="true"></i>
+                    Nuevo Producto
+                </a>
+            </div>
+
+        </div>
+
+    </form>
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-box-seam-fill" aria-hidden="true"></i>
+                Listado de Productos
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Stock / Estatus</th>
+                            <th scope="col">Activo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prod in pagina %}
+                            <tr>
+                                <td><strong>{{ prod.codigo }}</strong></td>
+                                <td>{{ prod.nombre }}</td>
+                                <td>{{ prod.categoria.nombre }}</td>
+                                <td>${{ prod.precio|floatformat:2 }}</td>
+                                <td>
+                                    {{ prod.stock }}
+                                    <span class="{% if prod.stock > 0 %}badge-existencia{% else %}badge-agotado{% endif %}">
+                                        {{ prod.estatus }}
+                                    </span>
+                                </td>
+                                <td>{% if prod.activo %}Sí{% else %}No{% endif %}</td>
+                                <td>
+                                    <div class="acciones-celda">
+                                        <a
+                                            href="{% url 'gestion:producto_editar' prod.id_producto %}"
+                                            class="boton-gestion">
+                                            <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+                                            Editar
+                                        </a>
+
+                                        <form
+                                            method="post"
+                                            action="{% url 'gestion:producto_eliminar' prod.id_producto %}"
+                                            data-confirmar-eliminacion="¿Eliminar el producto {{ prod.nombre }}?">
+                                            {% csrf_token %}
+                                            <button type="submit" class="boton-gestion boton-gestion-peligro">
+                                                <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    No hay productos registrados.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            {% if pagina.paginator.num_pages > 1 %}
+                <nav class="gestion-paginacion" aria-label="Paginación de productos">
+                    {% if pagina.has_previous %}
+                        <a href="?page={{ pagina.previous_page_number }}&amp;q={{ busqueda|urlencode }}&amp;categoria={{ categoria_actual|default:'' }}">
+                            Anterior
+                        </a>
+                    {% endif %}
+                    <span class="pagina-actual">
+                        Página {{ pagina.number }} de {{ pagina.paginator.num_pages }}
+                    </span>
+                    {% if pagina.has_next %}
+                        <a href="?page={{ pagina.next_page_number }}&amp;q={{ busqueda|urlencode }}&amp;categoria={{ categoria_actual|default:'' }}">
+                            Siguiente
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+{% endblock %}

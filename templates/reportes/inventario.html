@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Reporte de Inventario | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Reporte de Inventario
+    </div>
+
+    <section class="seccion-reportes">
+
+        <h1 class="reportes-titulo">
+            Reporte General de Inventario
+        </h1>
+
+        <p class="reportes-introduccion">
+            Consulta y clasificación de existencias de todos los productos
+            registrados en el sistema (clasificados como
+            <strong>Existencia</strong> o <strong>Agotado</strong>).
+        </p>
+
+        <!-- Menu interno de reportes -->
+
+        <nav class="reportes-menu" aria-label="Secciones de reportes">
+
+            <a
+                href="{% url 'reportes:panel' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
+                Resumen y Dashboards
+            </a>
+
+            <a
+                href="{% url 'reportes:inventario' %}"
+                class="reportes-menu-enlace activo">
+
+                <i class="bi bi-boxes" aria-hidden="true"></i>
+                Reporte de Inventario
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_servicios' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+                Dashboard de Servicios
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_productos' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+                Dashboard de Productos
+            </a>
+
+        </nav>
+
+        <!-- Indicadores del filtro actual -->
+
+        <div class="reportes-indicadores">
+
+            <div class="indicador-tarjeta">
+                <span class="indicador-etiqueta">Productos Listados</span>
+                <span class="indicador-valor">{{ metricas.total_productos }}</span>
+            </div>
+
+            <div class="indicador-tarjeta indicador-existencia">
+                <span class="indicador-etiqueta">En Existencia</span>
+                <span class="indicador-valor">{{ metricas.en_existencia }}</span>
+            </div>
+
+            <div class="indicador-tarjeta indicador-agotado">
+                <span class="indicador-etiqueta">Agotados</span>
+                <span class="indicador-valor">{{ metricas.agotados }}</span>
+            </div>
+
+            <div class="indicador-tarjeta">
+                <span class="indicador-etiqueta">Unidades en Stock</span>
+                <span class="indicador-valor">{{ metricas.unidades_totales }}</span>
+            </div>
+
+        </div>
+
+        <!-- Filtros y exportacion -->
+
+        <form
+            method="get"
+            action="{% url 'reportes:inventario' %}"
+            class="reportes-filtros">
+
+            <div class="reportes-filtros-fila">
+
+                <div class="reportes-campo">
+                    <label for="filtro-q">Buscar producto</label>
+                    <input
+                        type="search"
+                        id="filtro-q"
+                        name="q"
+                        value="{{ busqueda }}"
+                        class="reportes-input"
+                        placeholder="Código, nombre o marca...">
+                </div>
+
+                <div class="reportes-campo">
+                    <label for="filtro-categoria">Categoría</label>
+                    <select
+                        id="filtro-categoria"
+                        name="categoria"
+                        class="reportes-select">
+
+                        <option value="">Todas</option>
+                        {% for cat in categorias %}
+                            <option
+                                value="{{ cat.id_categoria }}"
+                                {% if categoria_actual == cat.id_categoria %}selected{% endif %}>
+                                {{ cat.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="reportes-campo">
+                    <label for="filtro-estatus">Clasificación</label>
+                    <select
+                        id="filtro-estatus"
+                        name="estatus"
+                        class="reportes-select">
+
+                        <option value="">Todos</option>
+                        <option
+                            value="existencia"
+                            {% if estatus_actual == "existencia" %}selected{% endif %}>
+                            Existencia
+                        </option>
+                        <option
+                            value="agotado"
+                            {% if estatus_actual == "agotado" %}selected{% endif %}>
+                            Agotado
+                        </option>
+                    </select>
+                </div>
+
+                <div class="reportes-botones">
+
+                    <button type="submit" class="boton-reporte">
+                        <i class="bi bi-funnel-fill" aria-hidden="true"></i>
+                        Filtrar
+                    </button>
+
+                    <a
+                        href="{% url 'reportes:inventario_pdf' %}?q={{ busqueda|urlencode }}&amp;categoria={{ categoria_actual|default:'' }}&amp;estatus={{ estatus_actual|urlencode }}"
+                        class="boton-reporte boton-reporte-pdf">
+
+                        <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+                        Exportar PDF
+                    </a>
+
+                    <a
+                        href="{% url 'reportes:inventario_excel' %}?q={{ busqueda|urlencode }}&amp;categoria={{ categoria_actual|default:'' }}&amp;estatus={{ estatus_actual|urlencode }}"
+                        class="boton-reporte boton-reporte-excel">
+
+                        <i class="bi bi-file-earmark-excel-fill" aria-hidden="true"></i>
+                        Exportar Excel
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- Tabla general de inventario -->
+
+        <article class="reporte-bloque">
+
+            <div class="reporte-bloque-encabezado">
+
+                <h2>
+                    <i class="bi bi-table" aria-hidden="true"></i>
+                    Inventario General de Productos
+                </h2>
+
+            </div>
+
+            <div class="reporte-bloque-cuerpo">
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-reporte">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Marca / Modelo</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Clasificación</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for producto in productos %}
+
+                                <tr>
+                                    <td><strong>{{ producto.codigo }}</strong></td>
+                                    <td>{{ producto.nombre }}</td>
+                                    <td>{{ producto.categoria.nombre }}</td>
+                                    <td>
+                                        {{ producto.marca|default:"-" }}
+                                        {% if producto.modelo %}
+                                            / {{ producto.modelo }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        ${{ producto.precio|floatformat:2 }}
+                                        {{ configuracion_sistema.moneda }}
+                                    </td>
+                                    <td>{{ producto.stock }}</td>
+                                    <td>
+                                        <span class="{% if producto.stock > 0 %}badge-existencia{% else %}badge-agotado{% endif %}">
+                                            {{ producto.estatus }}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            {% empty %}
+
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        No hay productos que coincidan con los filtros seleccionados.
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+{% endblock %}

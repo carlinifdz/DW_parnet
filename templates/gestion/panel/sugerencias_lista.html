@@ -1,0 +1,160 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Administración de Sugerencias{% endblock %}
+
+{% block encabezado_panel %}Buzón de Sugerencias{% endblock %}
+
+{% block contenido_panel %}
+
+    <div class="reportes-filtros">
+
+        <div class="reportes-filtros-fila">
+
+            <div class="acciones-celda">
+                <a
+                    href="{% url 'gestion:sugerencias_lista' %}"
+                    class="boton-gestion">
+                    Todas
+                </a>
+                <a
+                    href="?leida=0"
+                    class="boton-gestion">
+                    No leídas
+                </a>
+                <a
+                    href="?leida=1"
+                    class="boton-gestion">
+                    Leídas
+                </a>
+            </div>
+
+            <div class="reportes-botones ms-auto">
+                <a
+                    href="{% url 'reportes:sugerencias_excel' %}"
+                    class="boton-gestion boton-gestion-exito">
+                    <i class="bi bi-file-earmark-excel-fill" aria-hidden="true"></i>
+                    Exportar a Excel
+                </a>
+
+                <a
+                    href="{% url 'reportes:sugerencias_pdf' %}"
+                    class="boton-gestion">
+                    <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+                    Exportar a PDF
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-chat-left-text-fill" aria-hidden="true"></i>
+                Listado Paginado de Sugerencias
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre / Correo</th>
+                            <th scope="col">Mensaje</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sug in pagina %}
+                            <tr>
+                                <td>#{{ sug.id_sugerencia }}</td>
+                                <td>
+                                    <strong>{{ sug.nombre }}</strong>
+                                    <br><small>{{ sug.correo }}</small>
+                                </td>
+                                <td>{{ sug.mensaje }}</td>
+                                <td>
+                                    {% if sug.leida %}
+                                        <span class="badge-existencia">Leída</span>
+                                    {% else %}
+                                        <span class="badge-agotado">No leída</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ sug.fecha_registro|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <div class="acciones-celda">
+                                        <form
+                                            method="post"
+                                            action="{% url 'gestion:sugerencia_marcar_leida' sug.id_sugerencia %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="boton-gestion">
+                                                {% if sug.leida %}
+                                                    Marcar no leída
+                                                {% else %}
+                                                    Marcar leída
+                                                {% endif %}
+                                            </button>
+                                        </form>
+
+                                        <form
+                                            method="post"
+                                            action="{% url 'gestion:sugerencia_eliminar' sug.id_sugerencia %}"
+                                            data-confirmar-eliminacion="¿Eliminar esta sugerencia?">
+                                            {% csrf_token %}
+                                            <button type="submit" class="boton-gestion boton-gestion-peligro">
+                                                <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No hay sugerencias registradas.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            {% if pagina.paginator.num_pages > 1 %}
+                <nav class="gestion-paginacion" aria-label="Paginación de sugerencias">
+                    {% if pagina.has_previous %}
+                        <a href="?page=1{% if estado_actual %}&amp;leida={{ estado_actual }}{% endif %}">
+                            Primera
+                        </a>
+                        <a href="?page={{ pagina.previous_page_number }}{% if estado_actual %}&amp;leida={{ estado_actual }}{% endif %}">
+                            Anterior
+                        </a>
+                    {% endif %}
+                    <span class="pagina-actual">
+                        Página {{ pagina.number }} de {{ pagina.paginator.num_pages }}
+                    </span>
+                    {% if pagina.has_next %}
+                        <a href="?page={{ pagina.next_page_number }}{% if estado_actual %}&amp;leida={{ estado_actual }}{% endif %}">
+                            Siguiente
+                        </a>
+                        <a href="?page={{ pagina.paginator.num_pages }}{% if estado_actual %}&amp;leida={{ estado_actual }}{% endif %}">
+                            Última
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+{% endblock %}

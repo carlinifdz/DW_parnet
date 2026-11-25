@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Reportes y Dashboards | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Reportes y Dashboards
+    </div>
+
+    <section class="seccion-reportes">
+
+        <h1 class="reportes-titulo">
+            Centro de Reportes y Estadísticas
+        </h1>
+
+        <p class="reportes-introduccion">
+            Módulo administrativo de análisis de inventario, clasificación
+            de existencias, exportación de sugerencias y visualización de
+            indicadores operativos de ParNet Ingeniería.
+        </p>
+
+        <!-- Menu interno de reportes -->
+
+        <nav class="reportes-menu" aria-label="Secciones de reportes">
+
+            <a
+                href="{% url 'reportes:panel' %}"
+                class="reportes-menu-enlace activo">
+
+                <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
+                Resumen y Dashboards
+            </a>
+
+            <a
+                href="{% url 'reportes:inventario' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-boxes" aria-hidden="true"></i>
+                Reporte de Inventario
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_servicios' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+                Dashboard de Servicios
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_productos' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+                Dashboard de Productos
+            </a>
+
+        </nav>
+
+        <!-- Tarjetas de indicadores -->
+
+        <div class="reportes-indicadores">
+
+            <div class="indicador-tarjeta">
+                <span class="indicador-etiqueta">Total de Productos</span>
+                <span class="indicador-valor">{{ metricas.total_productos }}</span>
+            </div>
+
+            <div class="indicador-tarjeta indicador-existencia">
+                <span class="indicador-etiqueta">En Existencia</span>
+                <span class="indicador-valor">{{ metricas.en_existencia }}</span>
+            </div>
+
+            <div class="indicador-tarjeta indicador-agotado">
+                <span class="indicador-etiqueta">Agotados</span>
+                <span class="indicador-valor">{{ metricas.agotados }}</span>
+            </div>
+
+            <div class="indicador-tarjeta">
+                <span class="indicador-etiqueta">Solicitudes / Sugerencias</span>
+                <span class="indicador-valor">
+                    {{ total_solicitudes }} / {{ total_sugerencias }}
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Bloque de exportacion rapida -->
+
+        <article class="reporte-bloque">
+
+            <div class="reporte-bloque-encabezado">
+
+                <h2>
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    Exportación de Documentos Oficiales
+                </h2>
+
+            </div>
+
+            <div class="reporte-bloque-cuerpo">
+
+                <p class="mb-3">
+                    Descargue los reportes actualizados desde la base de datos
+                    MySQL en formato Excel (<code>.xlsx</code>) o documento
+                    portátil (<code>.pdf</code>):
+                </p>
+
+                <div class="reportes-botones">
+
+                    <a
+                        href="{% url 'reportes:inventario_pdf' %}"
+                        class="boton-reporte boton-reporte-pdf">
+
+                        <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+                        Inventario (PDF)
+                    </a>
+
+                    <a
+                        href="{% url 'reportes:inventario_excel' %}"
+                        class="boton-reporte boton-reporte-excel">
+
+                        <i class="bi bi-file-earmark-excel-fill" aria-hidden="true"></i>
+                        Inventario (Excel)
+                    </a>
+
+                    <a
+                        href="{% url 'reportes:sugerencias_excel' %}"
+                        class="boton-reporte boton-reporte-excel">
+
+                        <i class="bi bi-file-earmark-spreadsheet-fill" aria-hidden="true"></i>
+                        Sugerencias (Excel)
+                    </a>
+
+                    <a
+                        href="{% url 'reportes:sugerencias_pdf' %}"
+                        class="boton-reporte boton-reporte-pdf">
+
+                        <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+                        Sugerencias (PDF)
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- Dashboards integrados (10.6 y 10.7) -->
+
+        <div class="dashboards-grid">
+
+            <!-- Dashboard 1: Solicitudes por tipo de servicio -->
+
+            <article class="reporte-bloque" id="dashboard-servicios">
+
+                <div class="reporte-bloque-encabezado">
+
+                    <h2>
+                        <i class="bi bi-bar-chart-fill" aria-hidden="true"></i>
+                        Dashboard 1: Solicitudes por Tipo de Servicio
+                    </h2>
+
+                    <a
+                        href="{% url 'reportes:dashboard_servicios' %}"
+                        class="boton-reporte">
+                        Ver detalle
+                    </a>
+
+                </div>
+
+                <div class="reporte-bloque-cuerpo">
+
+                    {% if dashboard_servicios %}
+
+                        <div class="grafica-barras" role="img" aria-label="Gráfica de solicitudes por tipo de servicio">
+
+                            {% for item in dashboard_servicios %}
+
+                                <div class="grafica-fila">
+
+                                    <span class="grafica-etiqueta" title="{{ item.servicio }}">
+                                        {{ item.servicio }}
+                                    </span>
+
+                                    <div class="grafica-pista">
+                                        <div
+                                            class="grafica-relleno"
+                                            style="width: {{ item.porcentaje }}%;">
+                                        </div>
+                                    </div>
+
+                                    <span class="grafica-valor">
+                                        {{ item.total }}
+                                    </span>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="reportes-vacio">
+                            No hay datos de servicios registrados.
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            <!-- Dashboard 2: Productos por categoria -->
+
+            <article class="reporte-bloque" id="dashboard-productos">
+
+                <div class="reporte-bloque-encabezado">
+
+                    <h2>
+                        <i class="bi bi-pie-chart-fill" aria-hidden="true"></i>
+                        Dashboard 2: Productos por Categoría
+                    </h2>
+
+                    <a
+                        href="{% url 'reportes:dashboard_productos' %}"
+                        class="boton-reporte">
+                        Ver detalle
+                    </a>
+
+                </div>
+
+                <div class="reporte-bloque-cuerpo">
+
+                    {% if dashboard_productos %}
+
+                        <div class="grafica-barras" role="img" aria-label="Gráfica de productos por categoría">
+
+                            {% for item in dashboard_productos %}
+
+                                <div class="grafica-fila">
+
+                                    <span class="grafica-etiqueta" title="{{ item.categoria }}">
+                                        {{ item.categoria }}
+                                    </span>
+
+                                    <div class="grafica-pista">
+                                        <div
+                                            class="grafica-relleno grafica-relleno-productos"
+                                            style="width: {{ item.porcentaje }}%;">
+                                        </div>
+                                    </div>
+
+                                    <span class="grafica-valor">
+                                        {{ item.total }}
+                                    </span>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="reportes-vacio">
+                            No hay datos de categorías registrados.
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/reportes.js' %}"></script>
+{% endblock %}

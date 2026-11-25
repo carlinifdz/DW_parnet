@@ -1,0 +1,144 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Solicitudes de Servicios{% endblock %}
+
+{% block encabezado_panel %}Administración de Solicitudes de Servicios{% endblock %}
+
+{% block contenido_panel %}
+
+    <form
+        method="get"
+        action="{% url 'gestion:solicitudes_lista' %}"
+        class="reportes-filtros">
+
+        <div class="reportes-filtros-fila">
+
+            <div class="reportes-campo">
+                <label for="filtro-area-sol">Área de Servicio</label>
+                <select id="filtro-area-sol" name="area" class="reportes-select">
+                    <option value="">Todas las áreas</option>
+                    {% for area in areas %}
+                        <option
+                            value="{{ area.id_area }}"
+                            {% if area_actual == area.id_area %}selected{% endif %}>
+                            {{ area.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="reportes-campo">
+                <label for="filtro-estatus-sol">Estatus</label>
+                <select id="filtro-estatus-sol" name="estatus" class="reportes-select">
+                    <option value="">Todos los estatus</option>
+                    {% for valor, etiqueta in estatus_opciones %}
+                        <option
+                            value="{{ valor }}"
+                            {% if estatus_actual == valor %}selected{% endif %}>
+                            {{ etiqueta }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="reportes-botones">
+                <button type="submit" class="boton-gestion">
+                    <i class="bi bi-funnel-fill" aria-hidden="true"></i>
+                    Filtrar
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-clipboard2-check-fill" aria-hidden="true"></i>
+                Solicitudes Recibidas
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Solicitante / Empresa</th>
+                            <th scope="col">Área</th>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sol in pagina %}
+                            <tr>
+                                <td>#{{ sol.id_solicitud }}</td>
+                                <td>
+                                    <strong>{{ sol.nombre }}</strong>
+                                    {% if sol.empresa %}
+                                        <br><small>{{ sol.empresa }}</small>
+                                    {% endif %}
+                                </td>
+                                <td>{{ sol.area.nombre }}</td>
+                                <td>
+                                    {{ sol.correo }}
+                                    {% if sol.telefono %}
+                                        <br><small>{{ sol.telefono }}</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <strong>{{ sol.estatus }}</strong>
+                                </td>
+                                <td>{{ sol.fecha_solicitud|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <a
+                                        href="{% url 'gestion:solicitud_detalle' sol.id_solicitud %}"
+                                        class="boton-gestion">
+                                        <i class="bi bi-eye-fill" aria-hidden="true"></i>
+                                        Gestionar
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    No hay solicitudes de servicios registradas.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            {% if pagina.paginator.num_pages > 1 %}
+                <nav class="gestion-paginacion" aria-label="Paginación de solicitudes">
+                    {% if pagina.has_previous %}
+                        <a href="?page={{ pagina.previous_page_number }}&amp;estatus={{ estatus_actual|urlencode }}&amp;area={{ area_actual|default:'' }}">
+                            Anterior
+                        </a>
+                    {% endif %}
+                    <span class="pagina-actual">
+                        Página {{ pagina.number }} de {{ pagina.paginator.num_pages }}
+                    </span>
+                    {% if pagina.has_next %}
+                        <a href="?page={{ pagina.next_page_number }}&amp;estatus={{ estatus_actual|urlencode }}&amp;area={{ area_actual|default:'' }}">
+                            Siguiente
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+{% endblock %}

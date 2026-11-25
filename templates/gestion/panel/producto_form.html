@@ -1,0 +1,61 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}{{ titulo_formulario }}{% endblock %}
+
+{% block encabezado_panel %}{{ titulo_formulario }}{% endblock %}
+
+{% block contenido_panel %}
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-box-seam-fill" aria-hidden="true"></i>
+                Datos del Producto
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                <div class="gestion-formulario-grid">
+
+                    {% for field in form %}
+                        <div class="grupo-campo {% if field.name == 'descripcion' or field.name == 'ficha_tecnica' %}gestion-campo-completo{% endif %}">
+                            <label for="{{ field.id_for_label }}" class="etiqueta-parnet">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="error-campo" role="alert">
+                                    {% for error in field.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="acciones-celda mt-3">
+                    <button type="submit" class="boton-gestion boton-gestion-exito">
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                        Guardar Producto
+                    </button>
+
+                    <a href="{% url 'gestion:productos_lista' %}" class="boton-gestion">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </article>
+
+{% endblock %}

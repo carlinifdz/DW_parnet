@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -65,6 +66,26 @@ class Producto(models.Model):
         if self.stock > 0:
             return "Existencia"
         return "Agotado"
+
+    @property
+    def imagen_url(self):
+        if not self.imagen:
+            return ""
+
+        ruta = str(self.imagen).strip()
+
+        if not ruta:
+            return ""
+
+        if ruta.startswith(("http://", "https://", "/")):
+            return ruta
+
+        media_url = getattr(settings, "MEDIA_URL", "/media/")
+
+        if not media_url.endswith("/"):
+            media_url = f"{media_url}/"
+
+        return f"{media_url}{ruta.lstrip('/')}"
 
     def __str__(self):
         return f"{self.codigo} - {self.nombre}"

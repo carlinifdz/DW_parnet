@@ -1,0 +1,83 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Administración del Slider{% endblock %}
+
+{% block encabezado_panel %}Gestión de Imágenes del Slider{% endblock %}
+
+{% block contenido_panel %}
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-images" aria-hidden="true"></i>
+                Banners del Slider Principal
+            </h2>
+            <a href="{% url 'gestion:slider_crear' %}" class="boton-gestion boton-gestion-exito">
+                <i class="bi bi-plus-circle-fill" aria-hidden="true"></i>
+                Nuevo Banner
+            </a>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Enlace</th>
+                            <th scope="col">Orden</th>
+                            <th scope="col">Activo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in sliders %}
+                            <tr>
+                                <td>{{ item.id_slider }}</td>
+                                <td><strong>{{ item.titulo|default:"Sin título" }}</strong></td>
+                                <td>{{ item.enlace|default:"-" }}</td>
+                                <td>{{ item.orden }}</td>
+                                <td>{% if item.activo %}Sí{% else %}No{% endif %}</td>
+                                <td>
+                                    <div class="acciones-celda">
+                                        <a
+                                            href="{% url 'gestion:slider_editar' item.id_slider %}"
+                                            class="boton-gestion">
+                                            <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+                                            Editar
+                                        </a>
+
+                                        <form
+                                            method="post"
+                                            action="{% url 'gestion:slider_eliminar' item.id_slider %}"
+                                            data-confirmar-eliminacion="¿Eliminar este banner del slider?">
+                                            {% csrf_token %}
+                                            <button type="submit" class="boton-gestion boton-gestion-peligro">
+                                                <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No hay imágenes registradas en el slider.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </article>
+
+{% endblock %}
