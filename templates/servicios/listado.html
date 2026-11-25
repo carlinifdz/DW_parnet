@@ -40,6 +40,26 @@
 
         </p>
 
+
+        <!-- Acceso al formulario general de solicitudes -->
+
+        <div class="servicios-acciones">
+
+            <a
+                href="{% url 'servicios:solicitar' %}"
+                class="servicio-boton-solicitar">
+
+                <i class="bi bi-clipboard-check"></i>
+
+                Solicitar servicio
+
+            </a>
+
+        </div>
+
+
+        <!-- Cuadricula de areas de servicios -->
+
         <div class="servicios-grid">
 
             {% for area in areas %}
@@ -107,6 +127,9 @@
             {% endfor %}
 
         </div>
+
+
+        <!-- Regresar a la pagina principal -->
 
         <div class="servicios-acciones">
 

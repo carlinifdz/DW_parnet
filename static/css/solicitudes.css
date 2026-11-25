@@ -1,0 +1,840 @@
+/* =========================================
+   SECCION DE SOLICITUDES
+   ========================================= */
+
+.solicitud-seccion {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   RUTA DE NAVEGACION
+   ========================================= */
+
+.solicitud-ruta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+
+    padding: 8px 10px;
+    margin-bottom: 15px;
+
+    background: linear-gradient(
+        to bottom,
+        #397eae,
+        #083d7c
+    );
+
+    border: 1px solid #74a9cf;
+
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.solicitud-ruta a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.solicitud-ruta a:hover {
+    color: #ffdf42;
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   ENCABEZADO
+   ========================================= */
+
+.solicitud-encabezado {
+    margin-bottom: 15px;
+}
+
+.solicitud-encabezado h1 {
+    margin: 0 0 12px;
+
+    color: #ffdf42;
+
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.solicitud-encabezado h1 i {
+    margin-right: 5px;
+}
+
+.solicitud-encabezado p {
+    margin-bottom: 0;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   CONTENEDOR DEL FORMULARIO
+   ========================================= */
+
+.solicitud-formulario {
+    padding: 18px;
+
+    background: linear-gradient(
+        to bottom,
+        #075d89,
+        #064371
+    );
+
+    border: 1px solid #79a9ca;
+
+    box-shadow: 0 2px 5px rgba(
+        0,
+        0,
+        0,
+        0.2
+    );
+}
+
+
+/* =========================================
+   DISTRIBUCION DE LOS CAMPOS
+   ========================================= */
+
+.solicitud-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        2,
+        minmax(0, 1fr)
+    );
+
+    gap: 16px;
+}
+
+.solicitud-campo {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    min-width: 0;
+
+    gap: 6px;
+}
+
+.solicitud-campo-completo {
+    grid-column: 1 / -1;
+}
+
+.solicitud-campo label {
+    color: #ffdf42;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.solicitud-obligatorio {
+    color: #ffdf42;
+}
+
+
+/* =========================================
+   CONTROLES DEL FORMULARIO
+   ========================================= */
+
+.solicitud-control {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 9px 10px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #a3b9ca;
+    border-radius: 2px;
+
+    color: #222222;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    box-sizing: border-box;
+
+    outline: none;
+}
+
+.solicitud-control:focus {
+    border-color: #ffdf42;
+
+    box-shadow: 0 0 0 2px rgba(
+        255,
+        223,
+        66,
+        0.25
+    );
+}
+
+.solicitud-control::placeholder {
+    color: #808080;
+}
+
+textarea.solicitud-control {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* =========================================
+   TEXTOS DE AYUDA
+   ========================================= */
+
+.solicitud-ayuda {
+    color: #d5e9f7;
+
+    font-size: 12px;
+}
+
+.solicitud-nota {
+    margin: 15px 0;
+
+    color: #d5e9f7;
+
+    font-size: 12px;
+}
+
+.solicitud-aviso {
+    margin: 12px 0 0;
+
+    color: #d5e9f7;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ERRORES DE VALIDACION
+   ========================================= */
+
+.solicitud-error {
+    padding: 6px 8px;
+
+    background-color: #f8d7da;
+
+    border: 1px solid #e2a3a8;
+
+    color: #842029;
+
+    font-size: 12px;
+}
+
+.solicitud-campo-error .solicitud-control {
+    border: 2px solid #df7777;
+}
+
+.solicitud-error-general {
+    margin-bottom: 15px;
+    padding: 10px;
+
+    background-color: #f8d7da;
+
+    border: 1px solid #e2a3a8;
+
+    color: #842029;
+}
+
+.solicitud-error-general ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+
+/* =========================================
+   BOTONES
+   ========================================= */
+
+.solicitud-botones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    gap: 10px;
+}
+
+.solicitud-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-height: 36px;
+
+    padding: 8px 15px;
+
+    border: 1px solid #8cb1d0;
+    border-radius: 3px;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.solicitud-boton-cancelar {
+    background: linear-gradient(
+        to bottom,
+        #6495b9,
+        #32638c
+    );
+}
+
+.solicitud-boton-enviar {
+    background: linear-gradient(
+        to bottom,
+        #3477b5,
+        #083d7c
+    );
+}
+
+.solicitud-boton:hover:not(:disabled) {
+    color: #ffdf42;
+
+    border-color: #ffdf42;
+}
+
+.solicitud-boton:focus-visible {
+    outline: 2px solid #ffdf42;
+    outline-offset: 2px;
+}
+
+.solicitud-boton:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   GOOGLE RECAPTCHA
+   ========================================= */
+
+.solicitud-formulario .g-recaptcha {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =========================================
+   DISENO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 575.98px) {
+
+    .solicitud-seccion {
+        padding: 5px;
+    }
+
+    .solicitud-formulario {
+        padding: 12px;
+    }
+
+    .solicitud-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .solicitud-encabezado h1 {
+        font-size: 20px;
+    }
+
+    .solicitud-botones {
+        flex-direction: column;
+    }
+
+    .solicitud-boton {
+        width: 100%;
+    }
+
+}
+
+/* =========================================
+   CONFIRMACION DE VALIDACION
+   ========================================= */
+
+.solicitud-validacion-exitosa {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+    padding: 12px;
+
+    background-color: #d1e7dd;
+
+    border: 1px solid #a3cfbb;
+
+    border-radius: 3px;
+
+    color: #0f5132;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.solicitud-validacion-exitosa i {
+    flex-shrink: 0;
+
+    font-size: 20px;
+}
+
+
+/* =========================================
+   MENSAJES DE ERROR
+   ========================================= */
+
+.solicitud-campo-error label {
+    color: #ffdf42;
+}
+
+
+.solicitud-campo-error .solicitud-control {
+    border-color: #dc3545;
+
+    background-color: #fff7f7;
+}
+
+
+.solicitud-error {
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   CAPTCHA SIMULADO
+   ========================================= */
+
+.captcha-contenedor {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    width: 304px;
+    max-width: 100%;
+
+    min-height: 78px;
+
+    padding: 12px;
+
+    background-color: #fafafa;
+
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+
+.solicitud-campo .captcha-etiqueta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 14px;
+    font-weight: normal;
+
+    cursor: pointer;
+}
+
+
+.captcha-checkbox {
+    width: 26px;
+    height: 26px;
+
+    flex-shrink: 0;
+
+    accent-color: #4285f4;
+
+    cursor: pointer;
+}
+
+
+.captcha-identidad {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    color: #555555;
+
+    font-size: 10px;
+}
+
+
+.captcha-identidad i {
+    color: #557ba7;
+
+    font-size: 30px;
+}
+
+
+.captcha-identidad small {
+    color: #777777;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   CAPTCHA RESPONSIVO
+   ========================================= */
+
+@media (max-width: 575.98px) {
+
+    .captcha-contenedor {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .solicitud-campo .captcha-etiqueta {
+        font-size: 12px;
+        gap: 6px;
+    }
+
+}
+
+/* =========================================
+   CONFIRMACION DE SOLICITUD
+   ========================================= */
+
+.confirmacion-contenedor {
+
+    padding: 25px 20px;
+
+    background: linear-gradient(
+        to bottom,
+        #075d89,
+        #064371
+    );
+
+    border: 1px solid #79a9ca;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    box-shadow: 0 2px 5px rgba(
+        0,
+        0,
+        0,
+        0.2
+    );
+
+}
+
+
+/* =========================================
+   ICONO DE CONFIRMACION
+   ========================================= */
+
+.confirmacion-icono {
+
+    margin-bottom: 15px;
+
+    color: #a3e6b4;
+
+    font-size: 55px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================
+   TITULO Y MENSAJE
+   ========================================= */
+
+.confirmacion-titulo {
+
+    margin: 0 0 12px;
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+.confirmacion-mensaje {
+
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   RESUMEN DE LA SOLICITUD
+   ========================================= */
+
+.confirmacion-resumen {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 20px auto;
+
+    padding: 18px;
+
+    background-color: #08365a;
+
+    border: 1px solid #79a9ca;
+
+    text-align: left;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   FOLIO
+   ========================================= */
+
+.confirmacion-folio {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-bottom: 15px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #79a9ca;
+
+}
+
+.confirmacion-folio span {
+
+    color: #d5e9f7;
+
+    font-size: 13px;
+
+}
+
+.confirmacion-folio strong {
+
+    color: #ffdf42;
+
+    font-size: 28px;
+
+    letter-spacing: 1px;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* =========================================
+   DATOS DE LA SOLICITUD
+   ========================================= */
+
+.confirmacion-datos {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin: 0;
+
+}
+
+.confirmacion-dato {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+}
+
+.confirmacion-dato dt {
+
+    color: #d5e9f7;
+
+    font-weight: normal;
+
+}
+
+.confirmacion-dato dd {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* =========================================
+   ESTADO DE LA SOLICITUD
+   ========================================= */
+
+.confirmacion-estado {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #ffdf42;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================
+   NOTA INFORMATIVA
+   ========================================= */
+
+.confirmacion-nota {
+
+    margin: 20px 0;
+
+    color: #d5e9f7;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   BOTONES DE CONFIRMACION
+   ========================================= */
+
+.confirmacion-botones {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+/* =========================================
+   CONFIRMACION RESPONSIVA
+   ========================================= */
+
+@media (max-width: 575.98px) {
+
+    .confirmacion-contenedor {
+
+        padding: 20px 12px;
+
+    }
+
+    .confirmacion-icono {
+
+        font-size: 45px;
+
+    }
+
+    .confirmacion-titulo {
+
+        font-size: 19px;
+
+    }
+
+    .confirmacion-folio strong {
+
+        font-size: 24px;
+
+    }
+
+    .confirmacion-resumen {
+
+        padding: 12px;
+
+    }
+
+    .confirmacion-dato {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 4px;
+
+    }
+
+    .confirmacion-botones {
+
+        flex-direction: column;
+
+    }
+
+    .confirmacion-botones .solicitud-boton {
+
+        width: 100%;
+
+    }
+
+}
