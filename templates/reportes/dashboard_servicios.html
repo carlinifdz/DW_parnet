@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Dashboard de Servicios | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Dashboard de Servicios
+    </div>
+
+    <section class="seccion-reportes">
+
+        <h1 class="reportes-titulo">
+            Dashboard de Solicitudes por Tipo de Servicio
+        </h1>
+
+        <p class="reportes-introduccion">
+            Estadística comparativa del volumen de solicitudes recibidas
+            en cada área de servicio de ParNet Ingeniería.
+        </p>
+
+        <nav class="reportes-menu" aria-label="Secciones de reportes">
+
+            <a
+                href="{% url 'reportes:panel' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
+                Resumen y Dashboards
+            </a>
+
+            <a
+                href="{% url 'reportes:inventario' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-boxes" aria-hidden="true"></i>
+                Reporte de Inventario
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_servicios' %}"
+                class="reportes-menu-enlace activo">
+
+                <i class="bi bi-gear-wide-connected" aria-hidden="true"></i>
+                Dashboard de Servicios
+            </a>
+
+            <a
+                href="{% url 'reportes:dashboard_productos' %}"
+                class="reportes-menu-enlace">
+
+                <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+                Dashboard de Productos
+            </a>
+
+        </nav>
+
+        <article class="reporte-bloque">
+
+            <div class="reporte-bloque-encabezado">
+
+                <h2>
+                    <i class="bi bi-bar-chart-fill" aria-hidden="true"></i>
+                    Gráfica de Solicitudes por Tipo de Servicio (Total: {{ total_solicitudes }})
+                </h2>
+
+            </div>
+
+            <div class="reporte-bloque-cuerpo">
+
+                {% if dashboard_servicios %}
+
+                    <div class="grafica-canvas-contenedor">
+                        <canvas
+                            id="canvas-dashboard-servicios"
+                            class="grafica-canvas"
+                            width="640"
+                            height="240"
+                            data-grafica-reporte="servicios"
+                            data-etiquetas='[{% for item in dashboard_servicios %}"{{ item.servicio|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}]'
+                            data-valores='[{% for item in dashboard_servicios %}{{ item.total }}{% if not forloop.last %},{% endif %}{% endfor %}]'>
+                        </canvas>
+                    </div>
+
+                    <div class="grafica-barras" role="img" aria-label="Solicitudes por área de servicio">
+
+                        {% for item in dashboard_servicios %}
+
+                            <div class="grafica-fila">
+
+                                <span class="grafica-etiqueta" title="{{ item.servicio }}">
+                                    {{ item.servicio }}
+                                </span>
+
+                                <div class="grafica-pista">
+                                    <div
+                                        class="grafica-relleno"
+                                        style="width: {{ item.porcentaje }}%;">
+                                    </div>
+                                </div>
+
+                                <span class="grafica-valor">
+                                    {{ item.total }}
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="tabla-responsive mt-4">
+
+                        <table class="tabla-reporte">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Área</th>
+                                    <th scope="col">Tipo / Área de Servicio</th>
+                                    <th scope="col">Total de Solicitudes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in dashboard_servicios %}
+                                    <tr>
+                                        <td>{{ item.id_area }}</td>
+                                        <td>{{ item.servicio }}</td>
+                                        <td><strong>{{ item.total }}</strong></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="reportes-vacio">
+                        No hay áreas de servicio registradas.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </article>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/reportes.js' %}"></script>
+{% endblock %}

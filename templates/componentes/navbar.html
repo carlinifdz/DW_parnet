@@ -106,8 +106,20 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'productos' %}
+                            active
+                        {% endif %}"
+
+                        href="{% url 'productos:listado' %}"
+
+                        {% if request.resolver_match.namespace == 'productos' and request.resolver_match.url_name == 'listado' %}
+                            aria-current="page"
+                        {% endif %}>
+
                         Productos
+
                     </a>
 
                 </li>

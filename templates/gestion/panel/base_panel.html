@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    {% block titulo_panel %}Panel Administrativo{% endblock %} | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gestion.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Panel Administrativo
+    </div>
+
+    <section class="seccion-gestion">
+
+        <div class="gestion-cabecera">
+
+            <h1 class="gestion-titulo">
+                {% block encabezado_panel %}Panel de Gestión PARNET{% endblock %}
+            </h1>
+
+            <div class="gestion-usuario">
+                <span>
+                    <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
+                    {{ request.user.username|default:"Administrador" }}
+                </span>
+
+                <form
+                    method="post"
+                    action="{% url 'autenticacion:cerrar_sesion' %}"
+                    class="form-cerrar-sesion">
+                    {% csrf_token %}
+                    <button type="submit" class="boton-gestion boton-gestion-peligro">
+                        <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+                        Cerrar sesión
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Menu de modulos del panel administrativo -->
+
+        <nav class="gestion-menu" aria-label="Menú del panel administrativo">
+
+            <a
+                href="{% url 'gestion:panel' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'dashboard' %}activo{% endif %}">
+                <i class="bi bi-speedometer2" aria-hidden="true"></i>
+                Inicio Panel
+            </a>
+
+            <a
+                href="{% url 'gestion:productos_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'productos' %}activo{% endif %}">
+                <i class="bi bi-box-seam-fill" aria-hidden="true"></i>
+                Productos
+            </a>
+
+            <a
+                href="{% url 'gestion:categorias_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'categorias' %}activo{% endif %}">
+                <i class="bi bi-tags-fill" aria-hidden="true"></i>
+                Categorías
+            </a>
+
+            <a
+                href="{% url 'gestion:solicitudes_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'solicitudes' %}activo{% endif %}">
+                <i class="bi bi-clipboard2-check-fill" aria-hidden="true"></i>
+                Solicitudes
+            </a>
+
+            <a
+                href="{% url 'gestion:sugerencias_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'sugerencias' %}activo{% endif %}">
+                <i class="bi bi-chat-left-text-fill" aria-hidden="true"></i>
+                Sugerencias
+            </a>
+
+            <a
+                href="{% url 'gestion:noticias_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'noticias' %}activo{% endif %}">
+                <i class="bi bi-newspaper" aria-hidden="true"></i>
+                Noticias
+            </a>
+
+            <a
+                href="{% url 'gestion:clientes_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'clientes' %}activo{% endif %}">
+                <i class="bi bi-buildings-fill" aria-hidden="true"></i>
+                Clientes
+            </a>
+
+            <a
+                href="{% url 'gestion:slider_lista' %}"
+                class="gestion-menu-enlace {% if seccion_activa == 'slider' %}activo{% endif %}">
+                <i class="bi bi-images" aria-hidden="true"></i>
+                Slider
+            </a>
+
+            <a
+                href="{% url 'reportes:panel' %}"
+                class="gestion-menu-enlace">
+                <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
+                Reportes
+            </a>
+
+        </nav>
+
+        {% if messages %}
+            <div class="gestion-mensajes" role="status" aria-live="polite">
+                {% for message in messages %}
+                    <div class="alerta-gestion alerta-{{ message.tags|default:'info' }}">
+                        <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block contenido_panel %}
+        {% endblock %}
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/reportes.js' %}"></script>
+    <script src="{% static 'js/gestion.js' %}"></script>
+{% endblock %}

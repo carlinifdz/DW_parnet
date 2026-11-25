@@ -1,0 +1,541 @@
+/* =========================================
+   PARNET INGENIERIA
+   Modulo de reportes y dashboards
+   ========================================= */
+
+.seccion-reportes {
+    padding: 5px 10px 25px;
+}
+
+.reportes-titulo {
+    margin-bottom: 15px;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.reportes-introduccion {
+    margin-bottom: 18px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    text-align: justify;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   NAVEGACION DE REPORTES
+   ========================================= */
+
+.reportes-menu {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    padding: 10px;
+
+    border: 1px solid #82b8dd;
+
+    background: linear-gradient(
+        to bottom,
+        #09638d,
+        #06416d
+    );
+}
+
+.reportes-menu-enlace {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+
+    border: 1px solid #75a9d5;
+
+    background-color: #063575;
+}
+
+.reportes-menu-enlace:hover {
+    color: #ffff00;
+}
+
+.reportes-menu-enlace.activo {
+    font-weight: bold;
+
+    color: #063575;
+
+    border-color: #ffff00;
+
+    background-color: #ffee00;
+}
+
+
+/* =========================================
+   INDICADORES / TARJETAS DE RESUMEN
+   ========================================= */
+
+.reportes-indicadores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+.indicador-tarjeta {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 14px;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #07577f;
+}
+
+.indicador-etiqueta {
+    margin-bottom: 6px;
+
+    font-size: 12px;
+
+    color: #bde5f8;
+}
+
+.indicador-valor {
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.indicador-existencia .indicador-valor {
+    color: #86efac;
+}
+
+.indicador-agotado .indicador-valor {
+    color: #fca5a5;
+}
+
+
+/* =========================================
+   BLOQUES Y TARJETAS DE REPORTES
+   ========================================= */
+
+.reporte-bloque {
+    margin-bottom: 22px;
+
+    border: 1px solid #82b8dd;
+
+    background-color: #07577f;
+}
+
+.reporte-bloque-encabezado {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    background: linear-gradient(
+        to bottom,
+        #4298c5,
+        #063575
+    );
+
+    border-bottom: 1px solid #82b8dd;
+}
+
+.reporte-bloque-encabezado h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.reporte-bloque-cuerpo {
+    padding: 16px;
+}
+
+
+/* =========================================
+   FILTROS Y ACCIONES DE EXPORTACION
+   ========================================= */
+
+.reportes-filtros {
+    margin-bottom: 16px;
+
+    padding: 12px;
+
+    border: 1px solid #4298c5;
+
+    background: linear-gradient(
+        to bottom,
+        #09638d,
+        #06416d
+    );
+}
+
+.reportes-filtros-fila {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: flex-end;
+
+    gap: 10px;
+}
+
+.reportes-campo {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1 1 160px;
+
+    min-width: 0;
+}
+
+.reportes-campo label {
+    margin-bottom: 4px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #ffff00;
+}
+
+.reportes-input,
+.reportes-select {
+    width: 100%;
+
+    padding: 6px 10px;
+
+    font-size: 13px;
+
+    color: #063575;
+
+    background-color: #ffffff;
+
+    border: 1px solid #82b8dd;
+}
+
+.reportes-botones {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.boton-reporte {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    border: 1px solid #75a9d5;
+
+    background: linear-gradient(
+        to bottom,
+        #397cb0,
+        #063575
+    );
+}
+
+.boton-reporte:hover {
+    color: #ffff00;
+
+    filter: brightness(1.15);
+}
+
+.boton-reporte-excel {
+    border-color: #86efac;
+
+    background: linear-gradient(
+        to bottom,
+        #15803d,
+        #14532d
+    );
+}
+
+.boton-reporte-pdf {
+    border-color: #96c4df;
+
+    background: linear-gradient(
+        to bottom,
+        #063b7b,
+        #002e68
+    );
+}
+
+
+/* =========================================
+   TABLAS DE REPORTES
+   ========================================= */
+
+.tabla-reporte {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+.tabla-reporte thead th {
+    padding: 9px 10px;
+
+    text-align: left;
+
+    font-weight: bold;
+
+    color: #ffff00;
+
+    background-color: #063575;
+
+    border: 1px solid #4298c5;
+}
+
+.tabla-reporte tbody td {
+    padding: 8px 10px;
+
+    color: #ffffff;
+
+    border: 1px solid #4298c5;
+}
+
+.tabla-reporte tbody tr:nth-child(even) {
+    background-color: #064c70;
+}
+
+.badge-existencia,
+.badge-agotado {
+    display: inline-block;
+
+    padding: 2px 8px;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge-existencia {
+    color: #ffffff;
+
+    background-color: #166534;
+
+    border: 1px solid #86efac;
+}
+
+.badge-agotado {
+    color: #ffffff;
+
+    background-color: #991b1b;
+
+    border: 1px solid #fca5a5;
+}
+
+
+/* =========================================
+   GRAFICAS Y DASHBOARDS
+   ========================================= */
+
+.dashboards-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+}
+
+.grafica-barras {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.grafica-fila {
+    display: grid;
+
+    grid-template-columns: 190px minmax(0, 1fr) 55px;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.grafica-etiqueta {
+    font-size: 12.5px;
+    font-weight: bold;
+
+    color: #ffffff;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.grafica-pista {
+    width: 100%;
+    height: 18px;
+
+    background-color: #042b54;
+
+    border: 1px solid #4298c5;
+}
+
+.grafica-relleno {
+    height: 100%;
+
+    min-width: 4px;
+
+    background: linear-gradient(
+        to right,
+        #4298c5,
+        #ffee00
+    );
+}
+
+.grafica-relleno-productos {
+    background: linear-gradient(
+        to right,
+        #38bdf8,
+        #86efac
+    );
+}
+
+.grafica-valor {
+    font-size: 13px;
+    font-weight: bold;
+
+    text-align: right;
+
+    color: #ffff00;
+}
+
+.grafica-canvas-contenedor {
+    margin-bottom: 18px;
+
+    padding: 12px;
+
+    border: 1px solid #4298c5;
+
+    background-color: #053e63;
+}
+
+.grafica-canvas {
+    display: block;
+
+    width: 100%;
+
+    max-height: 260px;
+}
+
+.reportes-vacio {
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid #4298c5;
+
+    color: #d4e8f5;
+}
+
+
+/* =========================================
+   DISEÑO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 767.98px) {
+
+    .seccion-reportes {
+        padding: 5px 0 20px;
+    }
+
+    .reportes-indicadores {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .grafica-fila {
+        grid-template-columns: 130px minmax(0, 1fr) 45px;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .reportes-indicadores {
+        grid-template-columns: 1fr;
+    }
+
+    .reportes-filtros-fila,
+    .reportes-botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .boton-reporte {
+        width: 100%;
+        min-height: 40px;
+    }
+
+    .grafica-fila {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .grafica-valor {
+        text-align: left;
+    }
+
+}

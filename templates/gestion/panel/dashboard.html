@@ -1,0 +1,182 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Resumen General{% endblock %}
+
+{% block encabezado_panel %}Panel Administrativo PARNET{% endblock %}
+
+{% block contenido_panel %}
+
+    <!-- Indicadores generales -->
+
+    <div class="gestion-tarjetas-grid">
+
+        <div class="gestion-tarjeta-kpi">
+            <span class="gestion-kpi-etiqueta">Productos / Categorías</span>
+            <span class="gestion-kpi-valor">{{ metricas_inv.total_productos }}</span>
+            <span class="gestion-kpi-sub">
+                {{ metricas_inv.en_existencia }} en existencia | {{ metricas_inv.agotados }} agotados | {{ total_categorias }} categorías
+            </span>
+        </div>
+
+        <div class="gestion-tarjeta-kpi">
+            <span class="gestion-kpi-etiqueta">Solicitudes de Servicio</span>
+            <span class="gestion-kpi-valor">{{ total_solicitudes }}</span>
+            <span class="gestion-kpi-sub">
+                {{ solicitudes_pendientes }} pendientes de atención
+            </span>
+        </div>
+
+        <div class="gestion-tarjeta-kpi">
+            <span class="gestion-kpi-etiqueta">Sugerencias Recibidas</span>
+            <span class="gestion-kpi-valor">{{ total_sugerencias }}</span>
+            <span class="gestion-kpi-sub">
+                {{ sugerencias_no_leidas }} sin leer
+            </span>
+        </div>
+
+        <div class="gestion-tarjeta-kpi">
+            <span class="gestion-kpi-etiqueta">Contenido Institucional</span>
+            <span class="gestion-kpi-valor">{{ total_noticias }}</span>
+            <span class="gestion-kpi-sub">
+                {{ total_clientes }} clientes | {{ total_sliders }} banners
+            </span>
+        </div>
+
+    </div>
+
+    <!-- Accesos rapidos de administracion y exportacion -->
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+                Acciones Rápidas y Exportación de Reportes
+            </h2>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="acciones-celda">
+
+                <a href="{% url 'gestion:producto_crear' %}" class="boton-gestion">
+                    <i class="bi bi-plus-circle-fill" aria-hidden="true"></i>
+                    Nuevo Producto
+                </a>
+
+                <a href="{% url 'gestion:categoria_crear' %}" class="boton-gestion">
+                    <i class="bi bi-tag-fill" aria-hidden="true"></i>
+                    Nueva Categoría
+                </a>
+
+                <a href="{% url 'gestion:noticia_crear' %}" class="boton-gestion">
+                    <i class="bi bi-newspaper" aria-hidden="true"></i>
+                    Nueva Noticia
+                </a>
+
+                <a href="{% url 'gestion:cliente_crear' %}" class="boton-gestion">
+                    <i class="bi bi-building-add" aria-hidden="true"></i>
+                    Nuevo Cliente
+                </a>
+
+                <a href="{% url 'gestion:slider_crear' %}" class="boton-gestion">
+                    <i class="bi bi-image-fill" aria-hidden="true"></i>
+                    Nuevo Slider
+                </a>
+
+                <a href="{% url 'reportes:inventario' %}" class="boton-gestion">
+                    <i class="bi bi-boxes" aria-hidden="true"></i>
+                    Ver Inventario
+                </a>
+
+                <a href="{% url 'reportes:sugerencias_excel' %}" class="boton-gestion boton-gestion-exito">
+                    <i class="bi bi-file-earmark-excel-fill" aria-hidden="true"></i>
+                    Sugerencias Excel
+                </a>
+
+                <a href="{% url 'reportes:sugerencias_pdf' %}" class="boton-gestion">
+                    <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+                    Sugerencias PDF
+                </a>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    <!-- 9.9 Integracion de reportes y dashboards en el panel -->
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-bar-chart-fill" aria-hidden="true"></i>
+                Dashboard Integrado: Solicitudes por Tipo de Servicio
+            </h2>
+            <a href="{% url 'reportes:dashboard_servicios' %}" class="boton-gestion">
+                Ver reporte completo
+            </a>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            {% if dashboard_servicios %}
+                <div class="grafica-barras">
+                    {% for item in dashboard_servicios %}
+                        <div class="grafica-fila">
+                            <span class="grafica-etiqueta" title="{{ item.servicio }}">
+                                {{ item.servicio }}
+                            </span>
+                            <div class="grafica-pista">
+                                <div class="grafica-relleno" style="width: {{ item.porcentaje }}%;"></div>
+                            </div>
+                            <span class="grafica-valor">{{ item.total }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="mb-0">No hay datos de servicios registrados.</p>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-pie-chart-fill" aria-hidden="true"></i>
+                Dashboard Integrado: Productos por Categoría
+            </h2>
+            <a href="{% url 'reportes:dashboard_productos' %}" class="boton-gestion">
+                Ver reporte completo
+            </a>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            {% if dashboard_productos %}
+                <div class="grafica-barras">
+                    {% for item in dashboard_productos %}
+                        <div class="grafica-fila">
+                            <span class="grafica-etiqueta" title="{{ item.categoria }}">
+                                {{ item.categoria }}
+                            </span>
+                            <div class="grafica-pista">
+                                <div class="grafica-relleno grafica-relleno-productos" style="width: {{ item.porcentaje }}%;"></div>
+                            </div>
+                            <span class="grafica-valor">{{ item.total }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="mb-0">No hay datos de categorías registrados.</p>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+{% endblock %}

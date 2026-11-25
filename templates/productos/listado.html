@@ -1,0 +1,397 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+    Productos | ParNet Ingeniería
+
+{% endblock %}
+
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+
+        Productos
+
+    </div>
+
+    <section class="seccion-productos">
+
+        <h1 class="productos-titulo">
+
+            Catálogo de Productos
+
+        </h1>
+
+        <p class="productos-introduccion">
+
+            ParNet Ingeniería pone a su disposición un catálogo
+            especializado de equipos, componentes eléctricos,
+            automatización industrial, herramientas e instrumentación
+            de las mejores marcas del sector.
+
+        </p>
+
+        <!-- Buscador y filtro por categorias -->
+
+        <form
+            method="get"
+            action="{% url 'productos:listado' %}"
+            class="productos-buscador"
+            id="formulario-buscador-productos"
+            role="search"
+            aria-label="Buscar y filtrar productos">
+
+            <div class="buscador-fila">
+
+                <div class="buscador-campo">
+
+                    <label
+                        for="campo-busqueda-producto"
+                        class="buscador-etiqueta">
+
+                        Buscar producto
+
+                    </label>
+
+                    <input
+                        type="search"
+                        id="campo-busqueda-producto"
+                        name="q"
+                        value="{{ busqueda }}"
+                        class="buscador-input"
+                        placeholder="Nombre, código, marca o modelo...">
+
+                </div>
+
+                <div class="buscador-campo">
+
+                    <label
+                        for="filtro-categoria-producto"
+                        class="buscador-etiqueta">
+
+                        Categoría
+
+                    </label>
+
+                    <select
+                        id="filtro-categoria-producto"
+                        name="categoria"
+                        class="buscador-select">
+
+                        <option value="">
+                            Todas las categorías
+                        </option>
+
+                        {% for cat in categorias %}
+
+                            <option
+                                value="{{ cat.id_categoria }}"
+                                {% if categoria_actual == cat.id_categoria %}
+                                    selected
+                                {% endif %}>
+
+                                {{ cat.nombre }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="buscador-botones">
+
+                    <button
+                        type="submit"
+                        class="boton-producto">
+
+                        <i class="bi bi-search"
+                           aria-hidden="true">
+                        </i>
+
+                        Buscar
+
+                    </button>
+
+                    {% if busqueda or categoria_actual %}
+
+                        <a
+                            href="{% url 'productos:listado' %}"
+                            class="boton-producto boton-producto-secundario">
+
+                            <i class="bi bi-arrow-counterclockwise"
+                               aria-hidden="true">
+                            </i>
+
+                            Limpiar
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- Enlaces rapidos de categorias -->
+
+        {% if categorias %}
+
+            <nav
+                class="productos-categorias"
+                aria-label="Filtrar por categoría">
+
+                <a
+                    href="{% url 'productos:listado' %}{% if busqueda %}?q={{ busqueda|urlencode }}{% endif %}"
+                    class="categoria-etiqueta {% if not categoria_actual %}activa{% endif %}">
+
+                    Todas
+
+                </a>
+
+                {% for cat in categorias %}
+
+                    <a
+                        href="?categoria={{ cat.id_categoria }}{% if busqueda %}&amp;q={{ busqueda|urlencode }}{% endif %}"
+                        class="categoria-etiqueta {% if categoria_actual == cat.id_categoria %}activa{% endif %}">
+
+                        {{ cat.nombre }}
+
+                    </a>
+
+                {% endfor %}
+
+            </nav>
+
+        {% endif %}
+
+        <!-- Listado de productos -->
+
+        <div class="productos-grid">
+
+            {% for producto in pagina %}
+
+                <article class="producto-tarjeta">
+
+                    <div class="producto-encabezado">
+
+                        <span class="producto-codigo">
+
+                            {{ producto.codigo }}
+
+                        </span>
+
+                        <span
+                            class="producto-estatus {% if producto.stock > 0 %}estatus-existencia{% else %}estatus-agotado{% endif %}">
+
+                            {{ producto.estatus }}
+
+                        </span>
+
+                    </div>
+
+                    <div class="producto-imagen-contenedor">
+
+                        {% if producto.imagen_url %}
+
+                            <a href="{% url 'productos:detalle' producto.id_producto %}">
+
+                                <img
+                                    src="{{ producto.imagen_url }}"
+                                    alt="{{ producto.nombre }}"
+                                    class="producto-imagen"
+                                    loading="lazy">
+
+                            </a>
+
+                        {% else %}
+
+                            <i class="bi bi-box-seam producto-icono"
+                               aria-hidden="true">
+                            </i>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="producto-cuerpo">
+
+                        <span class="producto-categoria-badge">
+
+                            <i class="bi bi-tag-fill"
+                               aria-hidden="true">
+                            </i>
+
+                            {{ producto.categoria.nombre }}
+
+                        </span>
+
+                        <h2 class="producto-nombre">
+
+                            <a href="{% url 'productos:detalle' producto.id_producto %}">
+
+                                {{ producto.nombre }}
+
+                            </a>
+
+                        </h2>
+
+                        <p class="producto-meta">
+
+                            {% if producto.marca %}
+                                <strong>Marca:</strong> {{ producto.marca }}
+                            {% endif %}
+
+                            {% if producto.modelo %}
+                                | <strong>Modelo:</strong> {{ producto.modelo }}
+                            {% endif %}
+
+                        </p>
+
+                        {% if producto.descripcion %}
+
+                            <p class="producto-descripcion">
+
+                                {{ producto.descripcion|truncatewords:22 }}
+
+                            </p>
+
+                        {% endif %}
+
+                        <div class="producto-precio-fila">
+
+                            <span class="producto-precio">
+
+                                ${{ producto.precio|floatformat:2 }}
+                                {{ configuracion_sistema.moneda }}
+
+                            </span>
+
+                            <span class="producto-stock">
+
+                                Stock: {{ producto.stock }}
+
+                            </span>
+
+                        </div>
+
+                        <div class="producto-tarjeta-acciones">
+
+                            <a
+                                href="{% url 'productos:detalle' producto.id_producto %}"
+                                class="boton-producto">
+
+                                Ver detalle
+
+                                <i class="bi bi-arrow-right"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+                            <a
+                                href="{% url 'productos:ficha_pdf' producto.id_producto %}"
+                                class="boton-producto boton-producto-pdf"
+                                title="Descargar ficha técnica en PDF">
+
+                                <i class="bi bi-file-earmark-pdf-fill"
+                                   aria-hidden="true">
+                                </i>
+
+                                Ficha PDF
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="productos-mensaje">
+
+                    <i class="bi bi-box-seam"
+                       aria-hidden="true">
+                    </i>
+
+                    <p>
+
+                        No se encontraron productos disponibles
+                        con los criterios seleccionados.
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Paginacion -->
+
+        {% if pagina.paginator.num_pages > 1 %}
+
+            <nav
+                class="productos-paginacion"
+                aria-label="Paginación de productos">
+
+                {% if pagina.has_previous %}
+
+                    <a href="?page=1{% if busqueda %}&amp;q={{ busqueda|urlencode }}{% endif %}{% if categoria_actual %}&amp;categoria={{ categoria_actual }}{% endif %}">
+                        Primera
+                    </a>
+
+                    <a href="?page={{ pagina.previous_page_number }}{% if busqueda %}&amp;q={{ busqueda|urlencode }}{% endif %}{% if categoria_actual %}&amp;categoria={{ categoria_actual }}{% endif %}">
+                        Anterior
+                    </a>
+
+                {% endif %}
+
+                <span class="pagina-actual">
+
+                    Página {{ pagina.number }}
+                    de {{ pagina.paginator.num_pages }}
+
+                </span>
+
+                {% if pagina.has_next %}
+
+                    <a href="?page={{ pagina.next_page_number }}{% if busqueda %}&amp;q={{ busqueda|urlencode }}{% endif %}{% if categoria_actual %}&amp;categoria={{ categoria_actual }}{% endif %}">
+                        Siguiente
+                    </a>
+
+                    <a href="?page={{ pagina.paginator.num_pages }}{% if busqueda %}&amp;q={{ busqueda|urlencode }}{% endif %}{% if categoria_actual %}&amp;categoria={{ categoria_actual }}{% endif %}">
+                        Última
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+        <div class="productos-acciones">
+
+            <a
+                href="{% url 'core:inicio' %}"
+                class="boton-producto">
+
+                <i class="bi bi-house"
+                   aria-hidden="true">
+                </i>
+
+                Página Principal
+
+            </a>
+
+        </div>
+
+    </section>
+
+{% endblock %}

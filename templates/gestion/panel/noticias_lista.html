@@ -1,0 +1,97 @@
+{% extends "gestion/panel/base_panel.html" %}
+
+{% block titulo_panel %}Administración de Noticias{% endblock %}
+
+{% block encabezado_panel %}Gestión de Noticias{% endblock %}
+
+{% block contenido_panel %}
+
+    <article class="gestion-bloque">
+
+        <div class="gestion-bloque-encabezado">
+            <h2>
+                <i class="bi bi-newspaper" aria-hidden="true"></i>
+                Listado de Noticias
+            </h2>
+            <a href="{% url 'gestion:noticia_crear' %}" class="boton-gestion boton-gestion-exito">
+                <i class="bi bi-plus-circle-fill" aria-hidden="true"></i>
+                Nueva Noticia
+            </a>
+        </div>
+
+        <div class="gestion-bloque-cuerpo">
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-gestion">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Resumen</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Activa</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for noticia in pagina %}
+                            <tr>
+                                <td>{{ noticia.id_noticia }}</td>
+                                <td><strong>{{ noticia.titulo }}</strong></td>
+                                <td>{{ noticia.resumen|default:"-"|truncatewords:12 }}</td>
+                                <td>{{ noticia.fecha_publicacion|date:"d/m/Y" }}</td>
+                                <td>{% if noticia.activo %}Sí{% else %}No{% endif %}</td>
+                                <td>
+                                    <div class="acciones-celda">
+                                        <a
+                                            href="{% url 'gestion:noticia_editar' noticia.id_noticia %}"
+                                            class="boton-gestion">
+                                            <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+                                            Editar
+                                        </a>
+
+                                        <form
+                                            method="post"
+                                            action="{% url 'gestion:noticia_eliminar' noticia.id_noticia %}"
+                                            data-confirmar-eliminacion="¿Eliminar la noticia {{ noticia.titulo }}?">
+                                            {% csrf_token %}
+                                            <button type="submit" class="boton-gestion boton-gestion-peligro">
+                                                <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No hay noticias registradas.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            {% if pagina.paginator.num_pages > 1 %}
+                <nav class="gestion-paginacion" aria-label="Paginación de noticias">
+                    {% if pagina.has_previous %}
+                        <a href="?page={{ pagina.previous_page_number }}">Anterior</a>
+                    {% endif %}
+                    <span class="pagina-actual">
+                        Página {{ pagina.number }} de {{ pagina.paginator.num_pages }}
+                    </span>
+                    {% if pagina.has_next %}
+                        <a href="?page={{ pagina.next_page_number }}">Siguiente</a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+
+        </div>
+
+    </article>
+
+{% endblock %}
