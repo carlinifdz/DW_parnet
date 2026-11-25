@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Iniciar Sesión Administrativa | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/autenticacion.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Acceso Administrativo
+    </div>
+
+    <section class="seccion-autenticacion">
+
+        <h1 class="autenticacion-titulo">
+            Control de Acceso PARNET
+        </h1>
+
+        <p class="autenticacion-introduccion">
+            Área restringida para el personal administrativo de
+            ParNet Ingeniería. Ingresa tus credenciales autorizadas y
+            completa la verificación de seguridad para continuar.
+        </p>
+
+        {% if messages %}
+            <div class="autenticacion-mensajes" role="status" aria-live="polite">
+                {% for message in messages %}
+                    <div class="alerta-parnet alerta-{{ message.tags|default:'info' }}">
+                        <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="autenticacion-contenedor">
+
+            <article class="autenticacion-tarjeta">
+
+                <div class="autenticacion-encabezado">
+                    <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+                    <h2>Iniciar Sesión</h2>
+                </div>
+
+                <div class="autenticacion-cuerpo">
+
+                    {% if form.non_field_errors %}
+                        <div class="alerta-parnet alerta-error" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+                            <div>
+                                {% for error in form.non_field_errors %}
+                                    <p class="mb-0">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <form method="post"
+                          action="{% url 'autenticacion:iniciar_sesion' %}"
+                          class="formulario-autenticacion"
+                          novalidate>
+
+                        {% csrf_token %}
+
+                        {% if next %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                        {% endif %}
+
+                        <!-- Campo Usuario -->
+                        <div class="grupo-campo">
+                            <label for="{{ form.username.id_for_label }}" class="etiqueta-parnet">
+                                <i class="bi bi-person-fill" aria-hidden="true"></i>
+                                {{ form.username.label }} *
+                            </label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="error-campo" role="alert">
+                                    {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo Contraseña -->
+                        <div class="grupo-campo">
+                            <label for="{{ form.password.id_for_label }}" class="etiqueta-parnet">
+                                <i class="bi bi-key-fill" aria-hidden="true"></i>
+                                {{ form.password.label }} *
+                            </label>
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                                <div class="error-campo" role="alert">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo CAPTCHA -->
+                        <div class="grupo-campo grupo-captcha">
+                            <label class="etiqueta-parnet">
+                                <i class="bi bi-shield-check" aria-hidden="true"></i>
+                                {{ form.captcha.label }} *
+                            </label>
+                            <div class="contenedor-recaptcha">
+                                {{ form.captcha }}
+                            </div>
+                            {% if form.captcha.errors %}
+                                <div class="error-campo" role="alert">
+                                    {% for error in form.captcha.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Botones de accion -->
+                        <div class="autenticacion-acciones">
+                            <button type="submit" class="boton-parnet">
+                                <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+                                Ingresar al Sistema
+                            </button>
+
+                            <a href="{% url 'core:inicio' %}" class="boton-parnet-secundario">
+                                <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                                Volver al Inicio
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+            <aside class="autenticacion-info">
+                <h3>
+                    <i class="bi bi-lock-fill" aria-hidden="true"></i>
+                    Seguridad del Sistema
+                </h3>
+                <p>
+                    El acceso administrativo permite gestionar los catálogos de
+                    productos, solicitudes de servicios, noticias, clientes y
+                    reportes ejecutivos de ParNet Ingeniería.
+                </p>
+                <ul class="lista-software">
+                    <li>Autenticación protegida por sesión cifrada.</li>
+                    <li>Verificación contra accesos automatizados (reCAPTCHA v2).</li>
+                    <li>Control de permisos por rol administrativo.</li>
+                </ul>
+            </aside>
+
+        </div>
+
+    </section>
+
+{% endblock %}

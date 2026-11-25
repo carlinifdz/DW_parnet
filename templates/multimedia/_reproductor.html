@@ -1,0 +1,87 @@
+{% load static %}
+
+<section class="bloque-video-institucional" id="video-institucional">
+
+    <div class="video-encabezado">
+        <i class="bi bi-play-btn-fill" aria-hidden="true"></i>
+        <h2>{{ video.titulo }}</h2>
+    </div>
+
+    <div class="video-cuerpo">
+
+        <p class="video-descripcion">
+            {{ video.descripcion }}
+        </p>
+
+        {% if video.tiene_archivo_local %}
+
+            <div class="reproductor-contenedor">
+                <video class="reproductor-video-parnet"
+                       id="reproductor-parnet"
+                       controls
+                       preload="metadata"
+                       playsinline
+                       {% if video.url_poster %}poster="{{ video.url_poster }}"{% else %}poster="{% static 'img/oficina.jpg' %}"{% endif %}>
+
+                    {% if video.url_mp4 %}
+                        <source src="{{ video.url_mp4 }}" type="video/mp4">
+                    {% endif %}
+
+                    {% if video.url_webm %}
+                        <source src="{{ video.url_webm }}" type="video/webm">
+                    {% endif %}
+
+                    {% if video.url_subtitulos %}
+                        <track kind="captions"
+                               src="{{ video.url_subtitulos }}"
+                               srclang="es"
+                               label="Español"
+                               default>
+                    {% endif %}
+
+                    Tu navegador no soporta la reproducción directa de video HTML5.
+                </video>
+            </div>
+
+        {% elif video.url_externa %}
+
+            <div class="reproductor-contenedor reproductor-embed">
+                <iframe src="{{ video.url_externa }}"
+                        title="{{ video.titulo }}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+        {% else %}
+
+            <!-- Contenedor preparado para subir el video institucional -->
+            <div class="video-pendiente" role="region" aria-label="Espacio preparado para el video institucional">
+
+                <div class="video-pendiente-icono">
+                    <i class="bi bi-film" aria-hidden="true"></i>
+                </div>
+
+                <h3>Video Institucional en Preparación</h3>
+
+                <p>
+                    Este módulo se encuentra listo para reproducir el video
+                    institucional de <strong>ParNet Ingeniería</strong>
+                    (duración de {{ video.duracion_recomendada }}, con explicación
+                    del objetivo del sitio, estándares de calidad en proyectos y
+                    recomendaciones técnicas).
+                </p>
+
+                <p class="video-pendiente-ruta">
+                    <i class="bi bi-folder2-open" aria-hidden="true"></i>
+                    Ubicación preparada para el archivo:
+                    <code>{{ video.ruta_esperada }}</code>
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>

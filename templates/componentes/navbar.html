@@ -50,7 +50,15 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'quienes_somos' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'multimedia:quienes_somos' %}"
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'quienes_somos' %}
+                            aria-current="page"
+                        {% endif %}>
                         ¿Quiénes Somos?
                     </a>
 
@@ -106,7 +114,15 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'casos_exito' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'multimedia:casos_exito' %}"
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'casos_exito' %}
+                            aria-current="page"
+                        {% endif %}>
                         Casos de Éxito
                     </a>
 
@@ -114,7 +130,15 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'comunicacion' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'comunicacion:contacto' %}"
+                        {% if request.resolver_match.namespace == 'comunicacion' %}
+                            aria-current="page"
+                        {% endif %}>
                         Contactos
                     </a>
 
@@ -122,7 +146,15 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'socios' %}
+                            active
+                        {% endif %}"
+                        href="{% url 'multimedia:socios' %}"
+                        {% if request.resolver_match.namespace == 'multimedia' and request.resolver_match.url_name == 'socios' %}
+                            aria-current="page"
+                        {% endif %}>
                         Socios
                     </a>
 

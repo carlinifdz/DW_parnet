@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Socios Tecnológicos | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/multimedia.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Socios
+    </div>
+
+    <section class="seccion-institucional">
+
+        <h1 class="institucional-titulo">
+            Socios Tecnológicos y Alianzas
+        </h1>
+
+        <p class="institucional-introduccion">
+            Para garantizar el máximo rendimiento, durabilidad y respaldo en
+            cada proyecto, ParNet Ingeniería colabora con fabricantes y socios
+            tecnológicos líderes a nivel mundial en conectividad, redes y
+            energía.
+        </p>
+
+        <article class="bloque-informativo">
+            <img src="{% static 'img/tablero-electrico.jpg' %}"
+                 alt="Equipamiento tecnológico certificado"
+                 class="imagen-informativa">
+            <h2>Respaldo de Marcas Líderes</h2>
+            <p>
+                Nuestras alianzas estratégicas nos permiten ofrecer componentes
+                originales, garantías directas de fabricante y soluciones
+                validadas bajo normas internacionales para centros de datos,
+                plantas industriales y edificios corporativos.
+            </p>
+        </article>
+
+        <div class="casos-grid">
+
+            {% for socio in socios %}
+
+                <article class="institucional-tarjeta">
+
+                    <div class="institucional-encabezado">
+                        <i class="bi {{ socio.icono }}" aria-hidden="true"></i>
+                        <h2>{{ socio.nombre }}</h2>
+                    </div>
+
+                    <div class="institucional-cuerpo">
+
+                        <p class="etiqueta-sector">
+                            {{ socio.especialidad }}
+                        </p>
+
+                        <p>{{ socio.descripcion }}</p>
+
+                        <a href="{{ socio.sitio_web }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="boton-institucional">
+                            Visitar sitio oficial
+                            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/multimedia.js' %}"></script>
+{% endblock %}

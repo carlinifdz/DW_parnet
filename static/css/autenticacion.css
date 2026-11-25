@@ -1,0 +1,266 @@
+/* =========================================
+   PARNET INGENIERIA
+   Estilos de Autenticación Administrativa
+   ========================================= */
+
+.seccion-autenticacion {
+    padding: 5px 5px 25px;
+    color: #ffffff;
+}
+
+.autenticacion-titulo {
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffff00;
+}
+
+.autenticacion-introduccion {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+/* =========================================
+   CONTENEDOR Y TARJETA DE ACCESO
+   ========================================= */
+
+.autenticacion-contenedor {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.35fr) 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.autenticacion-tarjeta {
+    border: 1px solid #82b8dd;
+    background: linear-gradient(
+        to bottom,
+        #09638d,
+        #06416d
+    );
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.autenticacion-encabezado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    color: #063575;
+    background: linear-gradient(
+        to bottom,
+        #96c4df,
+        #4298c5
+    );
+    border-bottom: 1px solid #82b8dd;
+}
+
+.autenticacion-encabezado i {
+    font-size: 22px;
+}
+
+.autenticacion-encabezado h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #063575;
+}
+
+.autenticacion-cuerpo {
+    padding: 20px 18px;
+}
+
+/* =========================================
+   CAMPOS DE FORMULARIO
+   ========================================= */
+
+.grupo-campo {
+    margin-bottom: 16px;
+}
+
+.etiqueta-parnet {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffff00;
+}
+
+.etiqueta-parnet i {
+    margin-right: 4px;
+}
+
+.campo-parnet {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #063575;
+    background-color: #f2f8fc;
+    border: 1px solid #82b8dd;
+    border-radius: 3px;
+}
+
+.campo-parnet:focus {
+    background-color: #ffffff;
+    border-color: #ffff00;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.35);
+}
+
+.contenedor-recaptcha {
+    overflow-x: auto;
+    padding: 4px 0;
+}
+
+.error-campo {
+    margin-top: 5px;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffff00;
+    background-color: rgba(160, 20, 20, 0.65);
+    border-left: 3px solid #ffff00;
+}
+
+/* =========================================
+   ALERTAS Y MENSAJES
+   ========================================= */
+
+.autenticacion-mensajes {
+    margin-bottom: 16px;
+}
+
+.alerta-parnet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    border: 1px solid #82b8dd;
+    background-color: #07577f;
+    color: #ffffff;
+}
+
+.alerta-parnet i {
+    font-size: 18px;
+    color: #ffff00;
+}
+
+.alerta-error,
+.alerta-danger {
+    background-color: rgba(145, 25, 25, 0.85);
+    border-color: #ff9e9e;
+}
+
+.alerta-success {
+    background-color: rgba(16, 108, 62, 0.85);
+    border-color: #7ee2b0;
+}
+
+/* =========================================
+   BOTONES Y PANEL INFORMATIVO
+   ========================================= */
+
+.autenticacion-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.boton-parnet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #063575;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #82b8dd;
+    background: linear-gradient(
+        to bottom,
+        #b0d6ec,
+        #53a3ce
+    );
+}
+
+.boton-parnet:hover {
+    color: #002a65;
+    filter: brightness(1.08);
+}
+
+.boton-parnet-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid #82b8dd;
+    background-color: #07577f;
+}
+
+.boton-parnet-secundario:hover {
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+.autenticacion-info {
+    padding: 18px;
+    border: 1px solid #4298c5;
+    background-color: #07577f;
+}
+
+.autenticacion-info h3 {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #ffff00;
+}
+
+.autenticacion-info p {
+    margin-bottom: 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO
+   ========================================= */
+
+@media (max-width: 767.98px) {
+    .autenticacion-contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .autenticacion-titulo {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .autenticacion-cuerpo,
+    .autenticacion-info {
+        padding: 14px;
+    }
+
+    .autenticacion-acciones {
+        flex-direction: column;
+    }
+
+    .boton-parnet,
+    .boton-parnet-secundario {
+        width: 100%;
+        min-height: 40px;
+    }
+}

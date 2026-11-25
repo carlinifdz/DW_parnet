@@ -42,3 +42,7 @@ media/slider/*
 media/clientes/*
 !media/clientes/femsa.webp
 !media/clientes/gis.png
+
+!media/multimedia/
+media/multimedia/*
+!media/multimedia/.gitkeep
