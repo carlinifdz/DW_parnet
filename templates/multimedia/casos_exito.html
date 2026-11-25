@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Casos de Éxito | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/multimedia.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Casos de Éxito
+    </div>
+
+    <section class="seccion-institucional">
+
+        <h1 class="institucional-titulo">
+            Proyectos y Casos de Éxito
+        </h1>
+
+        <p class="institucional-introduccion">
+            A lo largo de nuestra trayectoria, en ParNet Ingeniería hemos
+            ejecutado proyectos de misión crítica en telecomunicaciones,
+            cableado estructurado, fibra óptica y sistemas eléctricos,
+            aplicando estrictos controles de calidad y certificación.
+        </p>
+
+        <article class="bloque-informativo">
+            <img src="{% static 'img/antenas.jpg' %}"
+                 alt="Infraestructura de telecomunicaciones"
+                 class="imagen-informativa">
+            <h2>Excelencia en Ejecución de Proyectos</h2>
+            <p>
+                Cada proyecto se desarrolla bajo una metodología estructurada
+                que abarca levantamiento técnico, ingeniería de detalle,
+                instalación normalizada, pruebas de certificación y entrega de
+                memoria técnica completa.
+            </p>
+        </article>
+
+        <div class="casos-grid">
+
+            {% for caso in casos %}
+
+                <article class="institucional-tarjeta">
+
+                    <div class="institucional-encabezado">
+                        <i class="bi {{ caso.icono }}" aria-hidden="true"></i>
+                        <h2>{{ caso.titulo }}</h2>
+                    </div>
+
+                    <div class="institucional-cuerpo">
+
+                        <p class="etiqueta-sector">
+                            <i class="bi bi-building-check" aria-hidden="true"></i>
+                            Sector: {{ caso.sector }}
+                        </p>
+
+                        <p>{{ caso.resumen }}</p>
+
+                        <h3 class="subtitulo-resultados">Resultados obtenidos:</h3>
+                        <ul class="lista-software">
+                            {% for resultado in caso.resultados %}
+                                <li>{{ resultado }}</li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="institucional-acciones">
+            <a href="{% url 'servicios:listado' %}" class="boton-institucional">
+                <i class="bi bi-tools" aria-hidden="true"></i>
+                Explorar Áreas de Servicio
+            </a>
+            <a href="{% url 'comunicacion:contacto' %}" class="boton-institucional-secundario">
+                <i class="bi bi-send-fill" aria-hidden="true"></i>
+                Solicitar Cotización
+            </a>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/multimedia.js' %}"></script>
+{% endblock %}

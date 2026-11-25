@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Video Institucional | ParNet Ingeniería
+{% endblock %}
+
+{% block estilos_extra %}
+    <link rel="stylesheet" href="{% static 'css/multimedia.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="titulo-pagina">
+        Multimedia
+    </div>
+
+    <section class="seccion-institucional">
+
+        <h1 class="institucional-titulo">
+            Presentación Multimedia de ParNet Ingeniería
+        </h1>
+
+        <p class="institucional-introduccion">
+            En este espacio presentamos el objetivo de nuestro portal web, la
+            finalidad de nuestras soluciones de ingeniería, el uso de estándares
+            de calidad en nuestros proyectos y consejos prácticos para tu
+            infraestructura tecnológica.
+        </p>
+
+        {% include "multimedia/_reproductor.html" %}
+
+        <div class="institucional-acciones">
+            <a href="{% url 'multimedia:quienes_somos' %}" class="boton-institucional">
+                <i class="bi bi-people-fill" aria-hidden="true"></i>
+                Conocer ¿Quiénes Somos?
+            </a>
+            <a href="{% url 'core:inicio' %}" class="boton-institucional-secundario">
+                <i class="bi bi-house-door-fill" aria-hidden="true"></i>
+                Ir a Página Principal
+            </a>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts_extra %}
+    <script src="{% static 'js/multimedia.js' %}"></script>
+{% endblock %}

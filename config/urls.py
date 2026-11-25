@@ -32,6 +32,11 @@ urlpatterns = [
     ),
 
     path(
+        "acceso/",
+        include("gestion.autenticacion.urls")
+    ),
+
+    path(
         "reportes/",
         include("reportes.urls")
     ),

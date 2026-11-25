@@ -15,7 +15,7 @@
                 Página Principal
             </a>
 
-            <a href="#">¿Quiénes Somos?</a>
+            <a href="{% url 'multimedia:quienes_somos' %}">¿Quiénes Somos?</a>
 
             <a href="{% url 'core:listado_clientes' %}">
                 Clientes
@@ -27,9 +27,9 @@
 
             <a href="#">Productos</a>
 
-            <a href="#">Casos de Éxito</a>
+            <a href="{% url 'multimedia:casos_exito' %}">Casos de Éxito</a>
 
-            <a href="#">Contacto</a>
+            <a href="{% url 'comunicacion:contacto' %}">Contacto</a>
 
             <a href="#">Soporte</a>
 
