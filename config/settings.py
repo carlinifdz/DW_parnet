@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_recaptcha",
 
     # Aplicaciones de ParNet
     "core",
@@ -171,3 +172,26 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Llaves primarias predeterminadas
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# =========================================
+# GOOGLE RECAPTCHA V2
+# =========================================
+
+RECAPTCHA_PUBLIC_KEY = os.getenv(
+    "RECAPTCHA_PUBLIC_KEY"
+)
+
+RECAPTCHA_PRIVATE_KEY = os.getenv(
+    "RECAPTCHA_PRIVATE_KEY"
+)
+
+
+# Permitir claves oficiales de prueba
+# solamente durante el desarrollo local
+
+if DEBUG:
+
+    SILENCED_SYSTEM_CHECKS = [
+        *globals().get("SILENCED_SYSTEM_CHECKS", []),
+        "django_recaptcha.recaptcha_test_key_error",
+    ]
