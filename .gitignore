@@ -44,5 +44,4 @@ media/clientes/*
 !media/clientes/gis.png
 
 !media/multimedia/
-media/multimedia/*
 !media/multimedia/.gitkeep

@@ -25,9 +25,7 @@ class VideoInstitucional:
         self.titulo = "Video Institucional — ParNet Ingeniería"
         self.duracion_recomendada = "2 a 4 minutos"
         self.descripcion = (
-            "Conoce el objetivo de ParNet Ingeniería, nuestra metodología "
-            "de calidad en proyectos de telecomunicaciones, redes eléctricas, "
-            "fibra óptica y consejos técnicos para la infraestructura de tu empresa."
+            "Conoce nuestra página"
         )
 
     def _ruta_archivo(self, nombre_archivo):
